@@ -167,7 +167,8 @@ Dark theme, red accent, condensed athletic headings.
 ### 5.1 Photos
 
 **Current assets** (pulled from the prototype on 2026-10-19; confirmed real Square One photos):
-- `src/assets/photos/hero.png`: **809×1080 portrait**, too small and the wrong shape for a full-width desktop hero. Use it cropped or as a split layout until a replacement exists.
+- ~~`hero.png`~~ turned out to be **logo brush artwork**, not a photo. It's moved to `src/assets/brand/logo-brush-art.png`. The M1 home page uses `gallery-14.jpg` (team photo, 1616×1080) as the hero.
+- **Many gallery photos are with other gyms and coaches** (seminars, tournaments, Renato Tavares, other academies): gallery-1, 3, 5–12, 19, 20, 22. They're good for the "lineage / about" story but not as "our gym" imagery. **Owners: tag which photos are at Square One.** The likely in-house ones are gallery-2, 4, 13–18 and 21.
 - `src/assets/photos/gallery-1…22.jpg`: mostly 1080px. **Low-res:** gallery-9 (350px), gallery-11 (414px), gallery-12 (480px), gallery-16 (793px), gallery-5 and gallery-20 (720px). Use these only as small thumbnails or drop them.
 - `src/assets/brand/gymdesk-logo.png`: 2048×2732 PNG, identical to the prototype's logo. This is the source for the SVG recreation. Also have `gymdesk-logo-medium.png` and `gymdesk-favicon.ico`.
 - All images go through `astro:assets` (AVIF/WebP, responsive `srcset`, lazy-loaded below the fold).
@@ -293,7 +294,7 @@ Before cutover, deploy to a Hostinger temporary domain or a `new.squareonejj.com
 | # | Milestone | Output |
 |---|---|---|
 | M0 | Inputs collected | Answers to §12, Gymdesk embed codes, photos, access |
-| M1 | Scaffold | Astro + Tailwind + tokens, layout, header/footer, CI deploy to staging |
+| M1 | Scaffold | Astro + Tailwind + tokens, layout, header/footer, CI deploy to staging. **Built 2026-10-19**; deploy is waiting on SSH secrets. |
 | M2 | Core pages | Home, programs, about, new-here (with FAQ), pricing, contact |
 | M3 | Gymdesk | Schedule, trial form, contact form, signup/login/shop links, fallbacks |
 | M4 | SEO / AI | JSON-LD, sitemap, robots, llms.txt, meta/OG, GA4 + events |

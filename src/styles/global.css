@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens, taken from the Lovable prototype (PLAN.md §5).
+ * Dark theme only. Brand red is for fills (white text on it is 5.9:1).
+ * Use primary-bright for red *text* on dark surfaces (5.4:1 on background).
+ */
+@theme {
+  --color-background: oklch(14.5% 0 0);
+  --color-surface: oklch(18.5% 0 0);
+  --color-muted: oklch(24% 0 0);
+  --color-foreground: oklch(98.5% 0 0);
+  --color-muted-foreground: oklch(68% 0 0);
+  --color-border: oklch(100% 0 0 / 0.12);
+  --color-input: oklch(100% 0 0 / 0.16);
+
+  --color-primary: oklch(52.3% 0.209 26.5);
+  --color-primary-hover: oklch(47% 0.2 26.5);
+  --color-primary-bright: oklch(64% 0.2 26.5);
+  --color-primary-foreground: oklch(99% 0 0);
+  --color-rating: oklch(82% 0.16 85);
+
+  --radius: 0.25rem;
+}
+
+/* Font variables are injected by Astro's <Font /> component at runtime. */
+@theme inline {
+  --font-display: var(--font-barlow-condensed);
+  --font-sans: var(--font-archivo);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-bold uppercase tracking-tight;
+    line-height: 1.05;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-primary-bright;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+}
+
+/* Custom utilities (Tailwind v4 `@utility` so they compose with variants and @apply). */
+@utility container-page {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-(--radius) px-5 py-3 font-display text-lg font-bold uppercase tracking-wide transition-colors;
+}
+
+@utility btn-primary {
+  @apply btn bg-primary text-primary-foreground hover:bg-primary-hover;
+}
+
+@utility btn-outline {
+  @apply btn border border-border text-foreground hover:bg-muted;
+}
+
+@utility eyebrow {
+  @apply font-display text-sm font-semibold uppercase tracking-[0.2em] text-primary-bright;
+}

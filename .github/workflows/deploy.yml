@@ -1,0 +1,77 @@
+# Build with Astro and rsync dist/ to Hostinger over SSH (PLAN.md §9).
+# Hostinger's own Git integration is unavailable for client-managed sites — not needed.
+#
+# Repository secrets:   HOSTINGER_HOST, HOSTINGER_PORT, HOSTINGER_USER,
+#                       HOSTINGER_SSH_KEY (private key), HOSTINGER_PATH (e.g. domains/squareonejj.com/public_html)
+# Repository variables:  SITE_ENV (staging | production — flip at cutover), GA4_ID (optional)
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          PUBLIC_SITE_ENV: ${{ vars.SITE_ENV || 'staging' }}
+          PUBLIC_GA4_ID: ${{ vars.GA4_ID }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          include-hidden-files: true # keep .htaccess
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: hostinger
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - name: Configure SSH
+        env:
+          SSH_KEY: ${{ secrets.HOSTINGER_SSH_KEY }}
+          HOST: ${{ secrets.HOSTINGER_HOST }}
+          PORT: ${{ secrets.HOSTINGER_PORT }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -p "${PORT:-65002}" "$HOST" >> ~/.ssh/known_hosts
+
+      - name: Rsync to Hostinger
+        env:
+          HOST: ${{ secrets.HOSTINGER_HOST }}
+          PORT: ${{ secrets.HOSTINGER_PORT }}
+          USER: ${{ secrets.HOSTINGER_USER }}
+          DEST: ${{ secrets.HOSTINGER_PATH }}
+        run: |
+          rsync -avz --delete \
+            -e "ssh -p ${PORT:-65002}" \
+            dist/ "$USER@$HOST:$DEST/"
