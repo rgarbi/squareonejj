@@ -9,8 +9,7 @@ import MapEmbed from '../components/MapEmbed.astro';
 import CtaBand from '../components/CtaBand.astro';
 import hero from '../assets/photos/gallery-14.jpg';
 import adultPhoto from '../assets/photos/gallery-18.jpg';
-import kidsPhoto from '../assets/photos/gallery-15.jpg';
-import ownersPhoto from '../assets/photos/gallery-4.jpg';
+import kidsPhoto from '../assets/photos/gallery-23.jpeg';
 import { site, formattedAddress } from '../data/site';
 import { reviewSummary } from '../data/reviews';
 
@@ -39,7 +38,7 @@ const programCards = [
     meta: 'Ages 5–12 · Gi & Nogi',
     body: 'Structured, supportive classes that build focus, confidence and real self-defense skills.',
     image: kidsPhoto,
-    alt: 'Kids and families celebrating together at Square One',
+    alt: 'Square One kids jiu jitsu class with their coaches',
   },
 ];
 ---
@@ -114,30 +113,6 @@ const programCards = [
       <a href="/schedule" class="btn-outline">Full schedule & booking</a>
     </div>
     <div class="mt-10"><WeeklySchedule /></div>
-  </section>
-
-  <!-- Owners -->
-  <section class="container-page mt-24 grid items-center gap-10 lg:grid-cols-2">
-    <Image
-      src={ownersPhoto}
-      alt="Square One coaches with a young student at a belt promotion"
-      widths={[480, 800, 1080]}
-      sizes="(min-width: 1024px) 50vw, 100vw"
-      class="w-full rounded-(--radius) object-cover"
-    />
-    <div>
-      <p class="eyebrow">Meet the owners</p>
-      <h2 class="mt-2 text-4xl sm:text-5xl">Josh & Heidi Smith</h2>
-      <p class="mt-4 text-muted-foreground">
-        Josh (black belt) and Heidi (purple belt) opened Square One in 2023 — starting again "from square one" to build the
-        kind of academy they'd want to train at: technical, welcoming and family-centered.
-      </p>
-      <blockquote class="mt-6 border-l-4 border-primary pl-5 text-xl">
-        <p>“I want my students to start where I was halfway through my journey, training the right way from day one.”</p>
-        <footer class="mt-2 text-sm text-muted-foreground">— Josh Smith, Owner & Head Coach</footer>
-      </blockquote>
-      <a href="/about" class="btn-outline mt-8">Our story</a>
-    </div>
   </section>
 
   <!-- Reviews -->
