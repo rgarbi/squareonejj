@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import Gymdesk from '../components/Gymdesk.astro';
+import { gymdesk } from '../config/gymdesk';
+import { site, formattedAddress, hours, days, formatTime } from '../data/site';
+
+const hoursByDay = days.map((day) => ({
+  day,
+  ranges: hours.filter((h) => h.day === day).map((h) => `${formatTime(h.opens)}–${formatTime(h.closes)}`),
+}));
+---
+
+<BaseLayout
+  breadcrumb="Contact"
+  title="Contact & Directions"
+  description={`Contact Square One Jiu Jitsu Academy at ${formattedAddress}. Call ${site.phone.display} or email ${site.email}. Hours and directions.`}
+>
+  <PageHero eyebrow="Say hello" title="Contact" lead="Questions about classes, kids, pricing or visiting? We answer every message." />
+
+  <section class="container-page mt-20 grid gap-10 lg:grid-cols-2">
+    <div class="space-y-10">
+      <div>
+        <SectionHeading title="Visit" />
+        <address class="mt-4 space-y-2 text-lg not-italic">
+          <p>{formattedAddress}</p>
+          <p><a href={`tel:${site.phone.e164}`} class="hover:text-primary-bright">{site.phone.display}</a></p>
+          <p><a href={`mailto:${site.email}`} class="hover:text-primary-bright">{site.email}</a></p>
+        </address>
+        <a href={site.mapsUrl} class="btn-outline mt-6" target="_blank" rel="noopener">Get directions</a>
+        {/* TODO: parking and entrance notes (PLAN.md item 4) */}
+      </div>
+
+      <div>
+        <SectionHeading title="Hours" />
+        <dl class="mt-4 max-w-sm space-y-1">
+          {
+            hoursByDay.map(({ day, ranges }) => (
+              <div class="flex justify-between gap-4 border-b border-border py-1">
+                <dt class="text-muted-foreground">{day}</dt>
+                <dd class="text-right">{ranges.length ? ranges.map((r) => <span class="block">{r}</span>) : 'Closed'}</dd>
+              </div>
+            ))
+          }
+        </dl>
+        <p class="mt-3 text-sm text-muted-foreground">Open during scheduled classes. Call or message to visit at another time.</p>
+      </div>
+
+      <div id="message">
+        <SectionHeading title="Send a message" />
+        {
+          gymdesk.forms.contact ? (
+            <div class="mt-6">
+              <Gymdesk kind="form" formRef={gymdesk.forms.contact} title="Contact form" minHeight={620}>
+                <p class="text-neutral-800">
+                  Email <a href={`mailto:${site.email}`} class="font-semibold underline">{site.email}</a>.
+                </p>
+              </Gymdesk>
+            </div>
+          ) : (
+            <p class="mt-4 text-muted-foreground">
+              Email <a href={`mailto:${site.email}`} class="text-primary-bright hover:underline">{site.email}</a> or call{' '}
+              <a href={`tel:${site.phone.e164}`} class="text-primary-bright hover:underline">{site.phone.display}</a> — we'll get back to you quickly.
+            </p>
+          )
+        }
+      </div>
+    </div>
+
+    <MapEmbed />
+  </section>
+</BaseLayout>

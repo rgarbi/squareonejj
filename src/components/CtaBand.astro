@@ -1,0 +1,26 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  lead?: string;
+}
+
+const {
+  title = 'Your first class is free',
+  lead = "Tell us who's training and we'll help you pick the right class. No experience needed.",
+} = Astro.props;
+---
+
+<section class="container-page mt-24">
+  <div class="rounded-(--radius) bg-primary px-6 py-12 text-center text-primary-foreground sm:px-12">
+    <h2 class="text-4xl sm:text-5xl">{title}</h2>
+    <p class="mx-auto mt-4 max-w-xl text-lg">{lead}</p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="/free-trial" class="btn bg-background text-foreground hover:bg-muted">Schedule your free class</a>
+      <a href={`tel:${site.phone.e164}`} class="btn border border-primary-foreground/60 hover:bg-primary-hover">
+        Call {site.phone.display}
+      </a>
+    </div>
+  </div>
+</section>

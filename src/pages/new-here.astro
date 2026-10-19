@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { faqsFor } from '../data/faq';
+import { faqSchema } from '../lib/schema';
+import { site, formattedAddress } from '../data/site';
+
+const faqs = faqsFor('general');
+
+const steps = [
+  ['Schedule your free class', "Fill out the short form and tell us who's training — you, your kids, or both."],
+  ['We reach out', "We'll contact you to answer questions and pick the right class."],
+  ['Come train', `Arrive 10 minutes early at ${formattedAddress}. We'll show you around and get you on the mat.`],
+];
+
+const bring = [
+  'Athletic clothes without zippers or pockets (rash guard or fitted t-shirt, shorts or athletic pants)',
+  'A water bottle',
+  'Sandals or slides for walking off the mat — no shoes on the mat',
+  'Trimmed fingernails and toenails; no jewelry',
+];
+
+const etiquette = [
+  'Arrive a few minutes early and introduce yourself to the coach.',
+  'Keep feet clean and wear sandals off the mat.',
+  "Tap early, tap often — and let go right away when your partner taps.",
+  'Train at a pace that keeps you and your partner safe.',
+  'Stay home if you are sick or have a skin infection.',
+];
+---
+
+<BaseLayout
+  breadcrumb="New Here"
+  title="New Here? Your First Jiu Jitsu Class"
+  description="What to expect at your first jiu-jitsu class at Square One in Lee's Summit, MO: what to wear, what to bring, mat etiquette and answers to common questions. Your first class is free."
+  schema={[faqSchema(faqs)]}
+>
+  <PageHero
+    eyebrow="New here"
+    title="Your first class"
+    lead="Walking into a jiu-jitsu academy for the first time can feel intimidating. Here's exactly what to expect — no experience or fitness level required."
+  >
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/free-trial" class="btn-primary">Schedule your free class</a>
+    </div>
+  </PageHero>
+
+  <section class="container-page mt-20">
+    <SectionHeading eyebrow="How it works" title="Getting started" />
+    <ol class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        steps.map(([title, body], i) => (
+          <li class="rounded-(--radius) border border-border bg-surface p-6">
+            <p class="font-display text-5xl font-bold text-primary-bright">{i + 1}</p>
+            <h3 class="mt-2 text-2xl">{title}</h3>
+            <p class="mt-2 text-muted-foreground">{body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="container-page mt-24 grid gap-10 md:grid-cols-2">
+    <div>
+      <SectionHeading title="What to bring" />
+      <ul class="mt-6 space-y-3">
+        {
+          bring.map((b) => (
+            <li class="flex gap-3">
+              <span class="text-primary-bright" aria-hidden="true">✓</span>
+              <span class="text-muted-foreground">{b}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <SectionHeading title="Mat etiquette" />
+      <ul class="mt-6 space-y-3">
+        {
+          etiquette.map((e) => (
+            <li class="flex gap-3">
+              <span class="text-primary-bright" aria-hidden="true">✓</span>
+              <span class="text-muted-foreground">{e}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="container-page mt-24 max-w-3xl">
+    <SectionHeading eyebrow="FAQ" title="Common questions" />
+    <div class="mt-8"><FaqList items={faqs} /></div>
+    <p class="mt-6 text-muted-foreground">
+      Still have a question? Call <a href={`tel:${site.phone.e164}`} class="text-primary-bright hover:underline">{site.phone.display}</a> or
+      <a href="/contact" class="text-primary-bright hover:underline">send us a message</a>.
+    </p>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

@@ -1,0 +1,26 @@
+---
+// Post-submit redirect target for the Gymdesk trial form (set in Gymdesk form settings).
+// Fires the GA4 lead conversion in M4. Not indexed, excluded from the sitemap.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Thanks — we'll be in touch" noindex>
+  <section class="container-page py-24 text-center">
+    <p class="eyebrow">You're in</p>
+    <h1 class="mt-4 text-5xl sm:text-6xl">Thanks — see you on the mat</h1>
+    <p class="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
+      We got your request and will reach out shortly to set up your free class. Have a question in the meantime? Call
+      <a href={`tel:${site.phone.e164}`} class="text-primary-bright hover:underline">{site.phone.display}</a>.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="/new-here" class="btn-primary">What to expect</a>
+      <a href="/schedule" class="btn-outline">View the schedule</a>
+    </div>
+  </section>
+
+  <script is:inline>
+    // GA4 lead conversion — mark `generate_lead` as a key event in GA4 admin.
+    if (window.gtag) gtag('event', 'generate_lead', { form: 'free_trial' });
+  </script>
+</BaseLayout>

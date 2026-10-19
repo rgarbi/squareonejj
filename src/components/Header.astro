@@ -20,7 +20,7 @@ const current = Astro.url.pathname.replace(/\.html$/, '').replace(/\/$/, '') || 
 <header class="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
   <div class="container-page flex h-16 items-center justify-between gap-4">
     <a href="/" class="flex items-center gap-3" aria-label={`${site.name} home`}>
-      <Image src={logo} alt="" width={40} height={40} loading="eager" class="size-10" />
+      <Image src={logo} alt="" width={40} height={40} densities={[1, 2]} loading="eager" class="size-10" />
       <span class="font-display text-lg leading-none font-bold uppercase">
         Square One<span class="block text-sm font-semibold tracking-widest text-muted-foreground">Jiu Jitsu</span>
       </span>

@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import WeeklySchedule from '../components/WeeklySchedule.astro';
+import Gymdesk from '../components/Gymdesk.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { gymdesk } from '../config/gymdesk';
+---
+
+<BaseLayout
+  breadcrumb="Schedule"
+  title="Class Schedule"
+  description="Jiu-jitsu class schedule at Square One in Lee's Summit, MO: Adult Gi and Nogi mornings and evenings, Youth Jiu Jitsu and Youth Nogi after school, Monday–Friday. Book online."
+>
+  <PageHero
+    eyebrow="Schedule"
+    title="Class schedule"
+    lead="Adult classes early mornings and evenings, kids classes after school — Monday through Friday."
+  >
+    <p class="mt-6 text-sm text-muted-foreground">
+      New to Square One? <a href="/free-trial" class="font-semibold text-primary-bright hover:underline">Start with a free class</a>.
+      Members can book below or <a href={gymdesk.links.login} class="font-semibold text-primary-bright hover:underline">log in</a>.
+    </p>
+  </PageHero>
+
+  <section class="container-page mt-16">
+    <SectionHeading eyebrow="Live schedule" title="Book a class" />
+    <div class="mt-8">
+      <Gymdesk kind="schedule" theme="dark" minHeight={720}>
+        <p class="text-muted-foreground">Enable JavaScript to book online, or call us — the weekly schedule is below.</p>
+      </Gymdesk>
+    </div>
+  </section>
+
+  <section class="container-page mt-24">
+    <SectionHeading eyebrow="At a glance" title="Weekly classes" />
+    <div class="mt-10"><WeeklySchedule /></div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

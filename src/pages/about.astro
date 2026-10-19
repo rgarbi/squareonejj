@@ -1,0 +1,131 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { coaches, values } from '../data/coaches';
+import { site } from '../data/site';
+import teamGi from '../assets/photos/gallery-2.jpg';
+import lineagePhoto from '../assets/photos/gallery-3.jpg';
+import g4 from '../assets/photos/gallery-4.jpg';
+import g13 from '../assets/photos/gallery-13.jpg';
+import g14 from '../assets/photos/gallery-14.jpg';
+import g15 from '../assets/photos/gallery-15.jpg';
+import g16 from '../assets/photos/gallery-16.jpg';
+import g17 from '../assets/photos/gallery-17.jpg';
+import g18 from '../assets/photos/gallery-18.jpg';
+import g21 from '../assets/photos/gallery-21.jpg';
+
+// TODO: owners to confirm which photos were taken at Square One (PLAN.md §5.1).
+const gallery = [
+  { src: teamGi, alt: 'Square One team photo in gis' },
+  { src: g14, alt: 'Square One nogi team photo' },
+  { src: g18, alt: 'Students drilling gi jiu jitsu' },
+  { src: g15, alt: 'Students and families celebrating together' },
+  { src: g16, alt: 'Training partners working a position' },
+  { src: g4, alt: 'A young student at a belt promotion' },
+  { src: g13, alt: 'Square One teammates at a tournament' },
+  { src: g17, alt: 'Students celebrating a belt promotion' },
+  { src: g21, alt: 'A Square One competitor has his hand raised at a tournament' },
+];
+
+const personSchema = coaches.map((c) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: c.name,
+  jobTitle: c.jobTitle,
+  description: c.bio,
+  worksFor: { '@id': `${site.url}/#business` },
+}));
+---
+
+<BaseLayout
+  breadcrumb="About"
+  title="About Us — Coaches & Story"
+  description="Square One Jiu Jitsu Academy was founded in 2023 by Josh Smith (black belt under Renato Tavares) and Heidi Smith in downtown Lee's Summit, MO. A Zenith BJJ affiliate under Robert Drysdale."
+  schema={personSchema}
+>
+  <PageHero
+    eyebrow="About"
+    title="Starting from square one"
+    lead="Founded in downtown Lee's Summit in 2023 by Josh and Heidi Smith — after years of building gyms and champions, they started again from square one."
+  />
+
+  <section class="container-page mt-20 grid items-center gap-10 lg:grid-cols-2">
+    <div class="space-y-4 text-lg text-muted-foreground">
+      <p>
+        {site.name} provides dedicated jiu-jitsu instruction focused on grappling, with classes for adults and youth in the gi
+        and in nogi.
+      </p>
+      <p>
+        Josh and Heidi built Square One as a place where adults and kids can learn jiu-jitsu through clear instruction,
+        strong fundamentals and a welcoming team culture — for students who want to learn, stay active and keep growing on
+        the mat, whether they plan to compete or not.
+      </p>
+    </div>
+    <Image src={teamGi} alt="The Square One Jiu Jitsu team in gis" widths={[480, 800, 1080]} sizes="(min-width: 1024px) 50vw, 100vw" class="w-full rounded-(--radius) object-cover" />
+  </section>
+
+  <section class="container-page mt-24">
+    <SectionHeading eyebrow="The team" title="Coaches" />
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {
+        coaches.map((c) => (
+          <article class="rounded-(--radius) border border-border bg-surface p-6">
+            <p class="eyebrow">{c.rank} · {c.role}</p>
+            <h3 class="mt-2 text-3xl">{c.name}</h3>
+            <p class="mt-3 text-muted-foreground">{c.bio}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="container-page mt-24 grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <SectionHeading eyebrow="Lineage" title="Zenith BJJ under Robert Drysdale" />
+      <div class="mt-6 space-y-4 text-muted-foreground">
+        <p>
+          Square One is a proud affiliate of <strong class="text-foreground">Zenith BJJ</strong>, led by Robert Drysdale —
+          co-founder and head coach of Zenith Jiu-Jitsu, ADCC Absolute champion and IBJJF World champion. That lineage
+          connects our Lee's Summit academy to one of jiu-jitsu's respected international teams.
+        </p>
+        <p>
+          Head coach Josh Smith earned his black belt under <strong class="text-foreground">Renato Tavares</strong>.
+        </p>
+      </div>
+    </div>
+    <Image src={lineagePhoto} alt="Training photos with the Renato Tavares Brazilian Jiu-Jitsu team" widths={[480, 800, 1080]} sizes="(min-width: 1024px) 50vw, 100vw" class="w-full rounded-(--radius) object-cover" />
+  </section>
+
+  <section class="container-page mt-24">
+    <SectionHeading eyebrow="What we value" title="Our values" lead="In head coach Josh Smith's words." />
+    <div class="mt-10 grid gap-6 md:grid-cols-3">
+      {
+        values.map((v) => (
+          <article class="rounded-(--radius) border border-border bg-surface p-6">
+            <h3 class="text-2xl">{v.title}</h3>
+            <blockquote class="mt-3 border-l-4 border-primary pl-4 text-lg">“{v.quote}”</blockquote>
+            <p class="mt-3 text-muted-foreground">{v.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="gallery" class="container-page mt-24 scroll-mt-20">
+    <SectionHeading eyebrow="Gallery" title="On the mats" />
+    <ul class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-3">
+      {
+        gallery.map((g) => (
+          <li>
+            <Image src={g.src} alt={g.alt} widths={[400, 700]} sizes="(min-width: 768px) 33vw, 50vw" class="aspect-square w-full rounded-(--radius) object-cover" />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

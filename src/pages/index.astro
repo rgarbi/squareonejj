@@ -1,20 +1,61 @@
 ---
-// M1 placeholder home page: exercises layout, tokens, fonts and images.
-// Full home page is built in M2 (PLAN.md §11).
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import WeeklySchedule from '../components/WeeklySchedule.astro';
+import Reviews from '../components/Reviews.astro';
+import PricingTable from '../components/PricingTable.astro';
+import MapEmbed from '../components/MapEmbed.astro';
+import CtaBand from '../components/CtaBand.astro';
 import hero from '../assets/photos/gallery-14.jpg';
+import adultPhoto from '../assets/photos/gallery-18.jpg';
+import kidsPhoto from '../assets/photos/gallery-15.jpg';
+import ownersPhoto from '../assets/photos/gallery-4.jpg';
 import { site, formattedAddress } from '../data/site';
+import { reviewSummary } from '../data/reviews';
+
+const proof = [
+  ...(reviewSummary
+    ? [{ title: `${reviewSummary.rating}★ on Google`, body: `Rated by ${reviewSummary.count} students and parents` }]
+    : []),
+  { title: 'Zenith BJJ affiliate', body: 'Part of Robert Drysdale’s international team' },
+  { title: 'Black belt instruction', body: 'Head coach Josh Smith, black belt under Renato Tavares' },
+  { title: 'First class free', body: 'No experience or fitness level required' },
+  { title: 'Month-to-month', body: 'No contracts, no enrollment fee' },
+];
+
+const programCards = [
+  {
+    href: '/programs/adult-bjj',
+    title: 'Adult Jiu Jitsu',
+    meta: 'Ages 13+ · Gi & Nogi',
+    body: 'Early-morning and evening classes, five days a week. Beginners welcome in every class.',
+    image: adultPhoto,
+    alt: 'Adults practicing jiu jitsu technique on the mats',
+  },
+  {
+    href: '/programs/kids-bjj',
+    title: 'Kids Jiu Jitsu',
+    meta: 'Ages 5–12 · Gi & Nogi',
+    body: 'Structured, supportive classes that build focus, confidence and real self-defense skills.',
+    image: kidsPhoto,
+    alt: 'Kids and families celebrating together at Square One',
+  },
+];
 ---
 
-<BaseLayout>
-  <section class="container-page grid items-center gap-10 py-16 lg:grid-cols-2 lg:py-24">
+<BaseLayout description={`${site.tagline} Adult and kids gi and nogi classes. Your first class is free.`}>
+  <!-- Hero -->
+  <section class="container-page grid items-center gap-10 py-14 lg:grid-cols-2 lg:py-20">
     <div>
-      <p class="eyebrow">Lee's Summit, MO</p>
+      <p class="eyebrow">Brazilian Jiu-Jitsu · Lee's Summit, MO</p>
       <h1 class="mt-4 text-5xl sm:text-6xl lg:text-7xl">
-        Square One <span class="text-primary-bright">Jiu Jitsu</span> Academy
+        Start from <span class="text-primary-bright">square one.</span>
       </h1>
-      <p class="mt-6 max-w-xl text-lg text-muted-foreground">{site.tagline}</p>
+      <p class="mt-6 max-w-xl text-lg text-muted-foreground">
+        {site.name} teaches grappling-focused jiu-jitsu to adults and kids in downtown Lee's Summit — with a welcoming,
+        ego-free room and instruction done the right way from day one.
+      </p>
       <div class="mt-8 flex flex-wrap gap-3">
         <a href="/free-trial" class="btn-primary">Your first class is free</a>
         <a href="/schedule" class="btn-outline">View class schedule</a>
@@ -31,4 +72,105 @@ import { site, formattedAddress } from '../data/site';
       class="w-full rounded-(--radius) object-cover"
     />
   </section>
+
+  <!-- Proof strip -->
+  <section class="border-y border-border bg-surface">
+    <ul class="container-page grid gap-6 py-8 sm:grid-cols-2 lg:grid-cols-5">
+      {
+        proof.map((p) => (
+          <li>
+            <p class="font-display text-xl font-bold uppercase">{p.title}</p>
+            <p class="text-sm text-muted-foreground">{p.body}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+
+  <!-- Programs -->
+  <section id="programs" class="container-page mt-24 scroll-mt-20">
+    <SectionHeading eyebrow="Train with us" title="Programs" lead="Classes for adults and kids, in the gi and without it." />
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {
+        programCards.map((p) => (
+          <a href={p.href} class="group overflow-hidden rounded-(--radius) border border-border bg-surface transition-colors hover:border-primary">
+            <Image src={p.image} alt={p.alt} widths={[480, 800]} sizes="(min-width: 768px) 50vw, 100vw" class="aspect-[16/9] w-full object-cover" />
+            <div class="p-6">
+              <p class="eyebrow">{p.meta}</p>
+              <h3 class="mt-2 text-3xl">{p.title}</h3>
+              <p class="mt-3 text-muted-foreground">{p.body}</p>
+              <p class="mt-4 font-semibold text-primary-bright group-hover:underline">Learn more →</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section class="container-page mt-24">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <SectionHeading eyebrow="This week" title="Class schedule" />
+      <a href="/schedule" class="btn-outline">Full schedule & booking</a>
+    </div>
+    <div class="mt-10"><WeeklySchedule /></div>
+  </section>
+
+  <!-- Owners -->
+  <section class="container-page mt-24 grid items-center gap-10 lg:grid-cols-2">
+    <Image
+      src={ownersPhoto}
+      alt="Square One coaches with a young student at a belt promotion"
+      widths={[480, 800, 1080]}
+      sizes="(min-width: 1024px) 50vw, 100vw"
+      class="w-full rounded-(--radius) object-cover"
+    />
+    <div>
+      <p class="eyebrow">Meet the owners</p>
+      <h2 class="mt-2 text-4xl sm:text-5xl">Josh & Heidi Smith</h2>
+      <p class="mt-4 text-muted-foreground">
+        Josh (black belt) and Heidi (purple belt) opened Square One in 2023 — starting again "from square one" to build the
+        kind of academy they'd want to train at: technical, welcoming and family-centered.
+      </p>
+      <blockquote class="mt-6 border-l-4 border-primary pl-5 text-xl">
+        <p>“I want my students to start where I was halfway through my journey, training the right way from day one.”</p>
+        <footer class="mt-2 text-sm text-muted-foreground">— Josh Smith, Owner & Head Coach</footer>
+      </blockquote>
+      <a href="/about" class="btn-outline mt-8">Our story</a>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="container-page mt-24">
+    <SectionHeading eyebrow="Community" title="What students say" />
+    <div class="mt-10"><Reviews /></div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="container-page mt-24">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+      <SectionHeading eyebrow="Membership" title="Simple monthly pricing" lead="Individual and family memberships. Prices are per month." />
+      <a href="/pricing" class="btn-outline">Pricing details</a>
+    </div>
+    <div class="mt-10"><PricingTable /></div>
+  </section>
+
+  <!-- Location -->
+  <section class="container-page mt-24 grid gap-10 lg:grid-cols-2">
+    <div>
+      <SectionHeading eyebrow="Visit" title="Find us in downtown Lee's Summit" />
+      <address class="mt-6 space-y-2 not-italic">
+        <p class="text-lg">{formattedAddress}</p>
+        <p><a href={`tel:${site.phone.e164}`} class="hover:text-primary-bright">{site.phone.display}</a></p>
+        <p><a href={`mailto:${site.email}`} class="hover:text-primary-bright">{site.email}</a></p>
+      </address>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <a href={site.mapsUrl} class="btn-outline" target="_blank" rel="noopener">Get directions</a>
+        <a href="/contact" class="btn-outline">Send a message</a>
+      </div>
+    </div>
+    <MapEmbed />
+  </section>
+
+  <CtaBand />
 </BaseLayout>

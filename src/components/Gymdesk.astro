@@ -1,0 +1,61 @@
+---
+/**
+ * Gymdesk widget embed (PLAN.md §4.1). widgets.js renders each placeholder as an iframe.
+ * - Loaded once per page and only on pages that use a widget (it pulls in jQuery).
+ * - Schedule and booking support theme="dark"; forms only have a light template,
+ *   so they sit on a white card.
+ * - Widgets don't render on localhost/127.0.0.1 — use a LAN IP or 127.0.0.2.
+ * The slot is a fallback shown under the widget's reserved space for no-JS visitors.
+ */
+import { gymdesk } from '../config/gymdesk';
+
+type Props = { title?: string; minHeight?: number } & (
+  | { kind: 'schedule'; theme?: 'dark' | 'light' }
+  | { kind: 'booking'; theme?: 'dark' | 'light' }
+  | { kind: 'form'; formRef: string }
+);
+
+const props = Astro.props;
+const defaultTitles = { schedule: 'Class schedule and booking', booking: 'Book a class', form: 'Form' };
+const frameTitle = props.title ?? defaultTitles[props.kind];
+const minHeight = props.minHeight ?? (props.kind === 'form' ? 560 : 700);
+
+const attrs: Record<string, string> = { 'attr-gym': gymdesk.gymId };
+let className: string;
+if (props.kind === 'form') {
+  className = 'maonrails-form';
+  attrs['attr-ref'] = props.formRef;
+} else {
+  className = props.kind === 'schedule' ? 'gymdesk-schedule' : 'gymdesk-booking';
+  attrs['attr-theme'] = props.theme ?? 'dark';
+}
+---
+
+<div class:list={['gymdesk-widget', props.kind === 'form' && 'rounded-(--radius) bg-white p-2 sm:p-4']}>
+  <div class={className} {...attrs} data-frame-title={frameTitle} style={`min-height:${minHeight}px`}></div>
+  <noscript><slot /></noscript>
+</div>
+
+<script is:inline define:vars={{ src: gymdesk.widgetsScript }}>
+  if (!window.__gymdeskLoaded) {
+    window.__gymdeskLoaded = true;
+    var s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    document.head.appendChild(s);
+
+    // widgets.js injects untitled iframes; give each one an accessible title.
+    new MutationObserver(function () {
+      document.querySelectorAll('[data-frame-title] iframe:not([title])').forEach(function (f) {
+        f.title = f.parentElement.getAttribute('data-frame-title');
+      });
+    }).observe(document.body, { childList: true, subtree: true });
+  }
+</script>
+
+<style>
+  .gymdesk-widget :global(iframe) {
+    width: 100%;
+    border: 0;
+  }
+</style>

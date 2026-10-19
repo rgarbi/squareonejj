@@ -1,0 +1,116 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import WeeklySchedule from '../../components/WeeklySchedule.astro';
+import FaqList from '../../components/FaqList.astro';
+import PricingTable from '../../components/PricingTable.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import kidsPhoto from '../../assets/photos/gallery-15.jpg';
+import promotionPhoto from '../../assets/photos/gallery-4.jpg';
+import { faqsFor } from '../../data/faq';
+import { faqSchema, courseSchema } from '../../lib/schema';
+
+const faqs = faqsFor('kids');
+
+const benefits = [
+  ['Confidence', 'Kids learn they can handle pressure — on the mat and off it.'],
+  ['Real self-defense', 'Jiu-jitsu teaches control without striking, so kids can protect themselves safely.'],
+  ['Focus & discipline', 'Structured classes with clear expectations and coaches who know every kid by name.'],
+  ['Fitness that’s fun', 'Strength, balance and coordination built through games, drills and teamwork.'],
+];
+---
+
+<BaseLayout
+  title="Kids Jiu Jitsu Classes in Lee's Summit, MO (Ages 5–12)"
+  description="Kids Brazilian Jiu-Jitsu in Lee's Summit, MO for ages 5–12. Gi and nogi classes that build confidence, focus and real self-defense. Family pricing. First class free."
+  breadcrumb="Kids Jiu Jitsu"
+  schema={[
+    faqSchema(faqs),
+    courseSchema({
+      name: 'Kids Brazilian Jiu-Jitsu (Ages 5–12)',
+      description: 'Youth Brazilian Jiu-Jitsu classes in the gi and nogi for kids ages 5 to 12.',
+      path: '/programs/kids-bjj',
+      programs: ['youth-gi', 'youth-nogi'],
+      ages: '5-12',
+    }),
+  ]}
+>
+  <PageHero
+    eyebrow="Ages 5–12 · Gi & Nogi"
+    title="Kids Jiu Jitsu in Lee's Summit"
+    lead="Structured, supportive classes that build confidence, focus and real self-defense skills — taught by coaches who care about every student. Family memberships available."
+  >
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a href="/free-trial" class="btn-primary">Book a free kids class</a>
+      <a href="/schedule" class="btn-outline">See the schedule</a>
+    </div>
+  </PageHero>
+
+  <section class="container-page mt-20 grid items-center gap-10 lg:grid-cols-2">
+    <div>
+      <SectionHeading eyebrow="Why jiu-jitsu" title="More than a sport" />
+      <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+        {
+          benefits.map(([title, body]) => (
+            <li>
+              <h3 class="text-2xl">{title}</h3>
+              <p class="mt-1 text-muted-foreground">{body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <Image
+      src={kidsPhoto}
+      alt="Kids and families from Square One together on the mats"
+      widths={[480, 800, 1440]}
+      sizes="(min-width: 1024px) 50vw, 100vw"
+      class="w-full rounded-(--radius) object-cover"
+    />
+  </section>
+
+  <section class="container-page mt-24 grid gap-8 md:grid-cols-2">
+    <article class="rounded-(--radius) border border-border bg-surface p-6">
+      <h2 class="text-3xl">Youth Jiu Jitsu</h2>
+      <p class="mt-3 text-muted-foreground">
+        A structured class in the gi (traditional uniform) that builds focus and confidence on the mat.
+      </p>
+      <p class="mt-4 text-sm font-semibold">Mon & Tue 5:30–6:30 PM</p>
+    </article>
+    <article class="rounded-(--radius) border border-border bg-surface p-6">
+      <h2 class="text-3xl">Youth Nogi</h2>
+      <p class="mt-3 text-muted-foreground">
+        Grappling without the gi, in a rash guard and shorts. Runs right before the adult evening class.
+      </p>
+      <p class="mt-4 text-sm font-semibold">Thu 5:30–6:30 PM</p>
+    </article>
+  </section>
+
+  <section class="container-page mt-24">
+    <SectionHeading eyebrow="When" title="Kids class times" />
+    <div class="mt-10"><WeeklySchedule audience="Youth" /></div>
+  </section>
+
+  <section class="container-page mt-24 grid items-center gap-10 lg:grid-cols-2">
+    <Image
+      src={promotionPhoto}
+      alt="A young Square One student at a belt promotion with coaches"
+      widths={[480, 800, 1080]}
+      sizes="(min-width: 1024px) 50vw, 100vw"
+      class="w-full rounded-(--radius) object-cover"
+    />
+    <div>
+      <SectionHeading eyebrow="For parents" title="Family pricing" lead="Family memberships make it simple to enroll siblings — or train alongside your kids." />
+      <div class="mt-8"><PricingTable compact /></div>
+    </div>
+  </section>
+
+  <section class="container-page mt-24 max-w-3xl">
+    <SectionHeading eyebrow="FAQ" title="Questions from parents" />
+    <div class="mt-8"><FaqList items={faqs} /></div>
+  </section>
+
+  <CtaBand title="Try a kids class free" lead="Tell us your child's name and age and we'll help you pick the right class." />
+</BaseLayout>

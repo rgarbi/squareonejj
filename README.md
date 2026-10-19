@@ -8,7 +8,7 @@ Marketing site for Square One Jiu Jitsu Academy, Lee's Summit, MO. See [PLAN.md]
 
 ```sh
 npm install
-npm run dev      # binds --host; open via your LAN IP so Gymdesk widgets load (they don't on localhost)
+npm run dev      # binds --host; open via your LAN IP or http://127.0.0.2:4321 — Gymdesk widgets don't load on localhost/127.0.0.1
 npm run build    # astro check + build into dist/
 npm run preview
 ```

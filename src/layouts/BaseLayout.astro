@@ -4,21 +4,25 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
-import { isProduction } from '../lib/env';
-import { localBusinessSchema } from '../lib/schema';
+import Analytics from '../components/Analytics.astro';
+import ConsentNotice from '../components/ConsentNotice.astro';
+import { isProduction, ga4Id } from '../lib/env';
+import { localBusinessSchema, websiteSchema, breadcrumbSchema } from '../lib/schema';
 
 interface Props {
   /** Page-specific title; the site name is appended. */
   title?: string;
   description?: string;
-  /** Absolute or root-relative OG image path. */
+  /** Short name for the breadcrumb trail (defaults to title). */
+  breadcrumb?: string;
+  /** Root-relative OG image path (1200×630). */
   image?: string;
   noindex?: boolean;
   /** Extra JSON-LD objects for this page. */
   schema?: object[];
 }
 
-const { title, description = site.tagline, image = '/icon-512.png', noindex = false, schema = [] } = Astro.props;
+const { title, description = site.tagline, breadcrumb, image = '/og-default.jpg', noindex = false, schema = [] } = Astro.props;
 
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | Jiu-Jitsu in Lee's Summit, MO`;
 // build.format 'file' makes pathname '/index.html', '/schedule.html' — canonicalize to clean URLs.
@@ -26,7 +30,15 @@ const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/(^|\/)index
 const canonical = new URL(cleanPath, site.url).href;
 const ogImage = new URL(image, site.url).href;
 const robots = !isProduction || noindex ? 'noindex, nofollow' : 'index, follow';
-const jsonLd = [localBusinessSchema(), ...schema];
+const isHome = cleanPath === '/';
+const jsonLd = [
+  localBusinessSchema(),
+  ...(isHome ? [websiteSchema()] : []),
+  ...(!isHome && !noindex
+    ? [breadcrumbSchema([{ name: 'Home', path: '/' }, { name: breadcrumb ?? title ?? site.name, path: cleanPath }])]
+    : []),
+  ...schema,
+];
 ---
 
 <!doctype html>
@@ -50,12 +62,21 @@ const jsonLd = [localBusinessSchema(), ...schema];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="geo.region" content="US-MO" />
+    <meta name="geo.placename" content={site.address.city} />
+    <meta name="geo.position" content={`${site.geo.latitude};${site.geo.longitude}`} />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary" />
 
     <Font cssVariable="--font-barlow-condensed" preload />
     <Font cssVariable="--font-archivo" />
 
     {jsonLd.map((data) => <script type="application/ld+json" set:html={JSON.stringify(data)} />)}
+
+    {isProduction && ga4Id && <Analytics id={ga4Id} />}
 
     <slot name="head" />
   </head>
@@ -68,5 +89,6 @@ const jsonLd = [localBusinessSchema(), ...schema];
       <slot />
     </main>
     <Footer />
+    {isProduction && ga4Id && <ConsentNotice />}
   </body>
 </html>

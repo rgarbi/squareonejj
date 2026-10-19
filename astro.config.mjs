@@ -18,7 +18,7 @@ export default defineConfig({
 
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/free-trial/thanks'),
+      filter: (page) => !/\/(thank-you|404)$/.test(page),
     }),
   ],
 

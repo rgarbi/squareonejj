@@ -1,0 +1,40 @@
+---
+// Lightweight analytics notice (PLAN.md §8). Shown once; "Decline" turns off GA4 analytics storage.
+---
+
+<div
+  id="consent-notice"
+  hidden
+  role="region"
+  aria-label="Cookie notice"
+  class="fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl rounded-(--radius) border border-border bg-surface p-4 text-sm shadow-2xl sm:flex sm:items-center sm:gap-4"
+>
+  <p class="text-muted-foreground">
+    We use cookies for anonymous analytics to understand how visitors use our site. No ads, no selling data.
+  </p>
+  <div class="mt-3 flex shrink-0 gap-2 sm:mt-0">
+    <button type="button" data-consent="denied" class="btn-outline px-3 py-1.5 text-sm">Decline</button>
+    <button type="button" data-consent="granted" class="btn-primary px-3 py-1.5 text-sm">OK</button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('consent-notice');
+    var stored = null;
+    try {
+      stored = localStorage.getItem('consent-analytics');
+    } catch (e) {}
+    if (stored) return;
+    el.hidden = false;
+    el.addEventListener('click', function (e) {
+      var choice = e.target.getAttribute && e.target.getAttribute('data-consent');
+      if (!choice) return;
+      try {
+        localStorage.setItem('consent-analytics', choice);
+      } catch (e) {}
+      if (window.gtag) gtag('consent', 'update', { analytics_storage: choice });
+      el.remove();
+    });
+  })();
+</script>

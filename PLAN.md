@@ -21,7 +21,8 @@ These are the canonical facts. Copy, JSON-LD and llms.txt are all generated from
 - **Heidi Smith:** Co-owner / Coach, **purple belt**.
 - **Programs:** Adult Gi, Adult Nogi (13+); Youth Jiu Jitsu, Youth Nogi (5–12).
 - **Phone:** (816) 287-0492. **Email:** contact@squareonejj.com.
-- **Address:** 2 SW 4th St, **Unit/Suite D**, Lee's Summit, MO 64063. The **Google Business Profile is the source of truth**. Copy its address text *verbatim* (Unit vs Suite, St vs Street) into `src/data/site.ts`; Google treats "Unit" and "Suite" as equivalent.
+- **Address:** **2 SW 4th St, Ste D**, Lee's Summit, MO 64063. This matches the Google Business Profile, which shows "2 SW 4th St Ste d" (read from the Maps embed on 2026-10-19).
+- **Google rating:** **4.9★ from 79 reviews** (GBP, 2026-10-19). Used in `src/data/reviews.ts` and for AggregateRating.
 - **Hours** (derived from the class schedule; no open mat):
 
 | Day | Hours |
@@ -118,7 +119,7 @@ Program pages are organized by **audience** (adult / kids), not gi / nogi, becau
 | Ref / URL | Value | Status |
 |---|---|---|
 | **Trial form ref** | `6kpYB` | Received |
-| **Contact form ref** | — | The current `/contact` page uses Gymdesk's *built-in* site contact form (it posts to `/contact`), which can't be embedded. **Create a custom "Contact" form** in Website → Forms (name, email, phone, message, captcha on) and get its ref. |
+| **Contact form ref** | `6ayyZ` | Received (custom embed-only form; the Gymdesk site's built-in contact form is untouched) |
 | **Gymdesk subdomain** | `https://squareonejj.gymdesk.com`, which currently 301s to squareonejj.com | Verified |
 | **Signup URL** | probably `https://squareonejj.gymdesk.com/signup` | **To verify** once the custom domain is detached or the site unpublished, or ask Gymdesk support |
 | **Login URL** | probably `https://squareonejj.gymdesk.com/login` | **To verify** (same) |
@@ -130,6 +131,16 @@ Behavior that matters:
 - **Iframe height:** the parent posts `setHeight` messages with the window height. Give containers a `min-height` (≥ 400px) to avoid layout shift.
 - **Booking conversion hook:** after a booking, Gymdesk posts a `gymdesk-booking-conversion` message containing a **conversion snippet configured in Gymdesk**, and the loader runs it. Put `gtag('event','trial_booked')` there, so no custom listener is needed. Gymdesk can also send `gymdesk-booking-redirect` to send the top window to a thank-you page.
 - Because it's jQuery + iframes, **load `widgets.js` only on pages with a widget**, deferred.
+
+### 4.3 Gymdesk setup tasks (found while building M3)
+
+- [ ] **Trial form `6kpYB` is long:** 9 fields, including date of birth and participants. **Decision (2026-10-19): keep it as is for now**, and review with Josh & Heidi later. Trimming it to name, email, phone, "Adults / Kids / Both" and an optional comment is the recommendation (§4.2).
+- [ ] **Set the trial form's post-submit redirect** to `https://squareonejj.com/thank-you`. **Deferred to cutover:** that URL 404s until the new site is live, and the current Gymdesk site uses this same form. Added to the §10 runbook. Until then, GA4 can't count form leads via the thank-you page.
+- [ ] **⚑ Potential improvement: self-serve trial booking.** The current booking flow asks for a payment card. Revisit later: confirm Gymdesk can let a new visitor book a free trial class with no card, then set `trialBookingEnabled: true` in `src/config/gymdesk.ts`. Off for launch.
+- [x] **Contact form created:** ref `6ayyZ`, embed-only, titled "Send us a message". Fields: name, email, phone, preferred contact method, comment (name, email, phone and comment required). Live on `/contact`.
+- [ ] **Booking conversion snippet:** in Gymdesk booking settings, add the GA4 event (M4).
+- Note: `widgets.js` loads **jQuery 3.6 (unminified) from code.jquery.com** on widget pages, so the schedule, free-trial and contact pages will score lower on Lighthouse. That's accepted; widgets load only where needed.
+- Theme: the schedule and booking widgets support `theme=dark`; forms only have a light template, so they sit on a white card.
 
 ### 4.2 Free-trial flow (decided: option c, both)
 
@@ -231,6 +242,14 @@ Expectation: on-site work makes Square One *eligible* to be cited. Off-site revi
 
 ## 8. Analytics and tracking
 
+**Setup still to do:**
+1. Create the GA4 property in an owner-held account and set the GitHub variable `GA4_ID`. GA only loads when `SITE_ENV=production` and `GA4_ID` are both set.
+2. In GA4 → Admin → Events, mark `generate_lead`, `click_phone` and `cta_free_trial` as **key events**.
+3. In Gymdesk booking settings, set the conversion snippet to `gtag('event','book_class');` (runs after a booking; see §4.1).
+4. `generate_lead` fires only once the trial form redirects to `/thank-you`, which is deferred to cutover (§4.3).
+
+**Implemented:** `src/components/Analytics.astro` (Consent Mode v2, with ad storage always denied) and `ConsentNotice.astro` (OK / Decline, remembered in localStorage).
+
 - GA4 via `gtag`, loaded with `defer`, plus Google Consent Mode v2 and a lightweight cookie notice.
 - **Conversion events:**
 
@@ -280,8 +299,10 @@ Before cutover, deploy to a Hostinger temporary domain or a `new.squareonejj.com
 **Launch window** (pick a quiet time, not right before class)
 1. Unpublish the Gymdesk website.
 2. Repoint the Namecheap A / CNAME records to Hostinger.
-3. Issue SSL on Hostinger and force HTTPS. Pick one canonical host (`squareonejj.com`, apex) and redirect `www` to it.
-4. Smoke-test every page, every widget and every redirect, on mobile.
+3. In Gymdesk, set the trial form `6kpYB` post-submit redirect to `https://squareonejj.com/thank-you` (§4.3).
+4. Issue SSL on Hostinger and force HTTPS. Pick one canonical host (`squareonejj.com`, apex) and redirect `www` to it.
+5. Set the GitHub variable `SITE_ENV=production` and re-run the deploy (enables indexing and robots.txt).
+6. Smoke-test every page, every widget and every redirect, on mobile.
 
 **After launch**
 1. Submit the sitemap to Google Search Console and Bing Webmaster Tools, and request indexing.
@@ -295,9 +316,9 @@ Before cutover, deploy to a Hostinger temporary domain or a `new.squareonejj.com
 |---|---|---|
 | M0 | Inputs collected | Answers to §12, Gymdesk embed codes, photos, access |
 | M1 | Scaffold | Astro + Tailwind + tokens, layout, header/footer, CI deploy to staging. **Built 2026-10-19**; deploy is waiting on SSH secrets. |
-| M2 | Core pages | Home, programs, about, new-here (with FAQ), pricing, contact |
-| M3 | Gymdesk | Schedule, trial form, contact form, signup/login/shop links, fallbacks |
-| M4 | SEO / AI | JSON-LD, sitemap, robots, llms.txt, meta/OG, GA4 + events |
+| M2 | Core pages | Home, programs, about, new-here (with FAQ), pricing, contact. **Built 2026-10-19** with DRAFT FAQ answers (`src/data/faq.ts` mirrors `docs/faq-draft.md`). |
+| M3 | Gymdesk | Schedule, trial form, contact form, signup/login/shop links, fallbacks. **Built 2026-10-19**: `/schedule` (live widget + static weekly grid), `/free-trial` (form `6kpYB`), `/thank-you` (noindex), contact form slot. Verified rendering in Chrome on 127.0.0.2. Blocked items are in §4.3. |
+| M4 | SEO / AI | JSON-LD, sitemap, robots, llms.txt, meta/OG, GA4 + events. **Built 2026-10-19.** Lighthouse (mobile, production build): Performance 99–100, Accessibility 100, SEO 100 on all pages tested. Best Practices fails only on local-HTTP checks, plus Gymdesk's third-party cookies on `/schedule`. |
 | M5 | QA | Lighthouse, a11y audit, cross-device testing, content proofread, owner review |
 | M6 | Launch | Cutover runbook (§10) |
 | M7 | Phase 2 | Location pages, blog, events, reviews page |

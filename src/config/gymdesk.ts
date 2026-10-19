@@ -8,10 +8,20 @@ export const gymdesk = {
   widgetsScript: 'https://app.gymdesk.com/js/widgets.js',
 
   forms: {
+    // Currently the long 9-field form (name, DOB, email, phone, contact method, experience,
+    // classes, participants, comment). Recommend trimming in Gymdesk and setting its
+    // post-submit redirect to https://squareonejj.com/thank-you.
     trial: '6kpYB',
-    // TODO: create a custom Contact form in Gymdesk (Website → Forms) and add its ref.
-    contact: null as string | null,
+    // "Website Contact (new site)" — embed-only, not shown on the Gymdesk-hosted site.
+    contact: '6ayyZ' as string | null,
   },
+
+  /**
+   * Show "pick your class now" booking under the trial form (PLAN.md §4.2).
+   * Off until Gymdesk is confirmed to let a new visitor book a free trial class
+   * without entering a payment card (the current booking flow asks for one).
+   */
+  trialBookingEnabled: false,
 
   // TODO: verify at cutover — available once the Gymdesk-hosted site is unpublished.
   links: {

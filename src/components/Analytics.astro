@@ -1,0 +1,53 @@
+---
+/**
+ * GA4 with Google Consent Mode v2 (PLAN.md §8). Production only.
+ * - Ads storage is always denied (no ad pixels). Analytics is granted by default
+ *   unless the visitor declines in <ConsentNotice />, which persists the choice.
+ * - Conversion events are sent from a delegated click listener (see events below).
+ */
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<script is:inline define:vars={{ id }}>
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    dataLayer.push(arguments);
+  };
+  var declined = false;
+  try {
+    declined = localStorage.getItem('consent-analytics') === 'denied';
+  } catch (e) {}
+  gtag('consent', 'default', {
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+    analytics_storage: declined ? 'denied' : 'granted',
+  });
+  gtag('js', new Date());
+  gtag('config', id);
+
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id;
+  document.head.appendChild(s);
+
+  // Conversion / engagement events, classified by link target.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    var params = { link_text: (a.textContent || '').trim().slice(0, 100), page_path: location.pathname };
+    var name = null;
+    if (href.indexOf('tel:') === 0) name = 'click_phone';
+    else if (href.indexOf('mailto:') === 0) name = 'click_email';
+    else if (/maps\.app\.goo\.gl|google\.com\/maps/.test(href)) name = 'click_directions';
+    else if (/gymdesk\.com\/signup/.test(href)) name = 'click_signup';
+    else if (/gymdesk\.com\/login/.test(href)) name = 'click_login';
+    else if (/^\/free-trial(\?|#|$)/.test(href)) name = 'cta_free_trial';
+    if (name) gtag('event', name, params);
+  });
+</script>

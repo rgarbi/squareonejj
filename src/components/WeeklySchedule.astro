@@ -1,0 +1,46 @@
+---
+// Static, crawlable weekly schedule. Also the fallback for the Gymdesk widget (PLAN.md §4).
+import { schedule, programs, days, formatTime, type Program } from '../data/site';
+
+interface Props {
+  audience?: 'Adult' | 'Youth';
+}
+
+const { audience } = Astro.props;
+
+const rows = schedule.filter((c) => !audience || programs[c.program].audience === audience);
+const byDay = days
+  .map((day) => ({ day, classes: rows.filter((c) => c.day === day) }))
+  .filter((d) => d.classes.length > 0);
+
+const tagClass: Record<Program, string> = {
+  'adult-gi': 'bg-primary/20 text-primary-bright',
+  'adult-nogi': 'bg-muted text-foreground',
+  'youth-gi': 'bg-primary/20 text-primary-bright',
+  'youth-nogi': 'bg-muted text-foreground',
+};
+---
+
+<div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+  {
+    byDay.map(({ day, classes }) => (
+      <div class="rounded-(--radius) border border-border bg-surface p-4">
+        <h3 class="text-xl">{day}</h3>
+        <ul class="mt-3 space-y-3">
+          {classes.map((c) => (
+            <li>
+              <p class="font-semibold">{programs[c.program].name}</p>
+              <p class="text-sm text-muted-foreground">
+                <time datetime={c.start}>{formatTime(c.start)}</time>–<time datetime={c.end}>{formatTime(c.end)}</time>
+              </p>
+              <span class:list={['mt-1 inline-block rounded-sm px-2 py-0.5 text-xs font-semibold uppercase', tagClass[c.program]]}>
+                {programs[c.program].style}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))
+  }
+</div>
+<p class="mt-4 text-sm text-muted-foreground">No classes on Saturday or Sunday. No open mat currently.</p>

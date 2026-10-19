@@ -19,6 +19,9 @@ RewriteRule ^ https://squareonejj.com%{REQUEST_URI} [R=301,L]
 RewriteRule ^book/?$ /schedule [R=301,L]
 RewriteRule ^gallery/?$ /about#gallery [R=301,NE,L]
 RewriteRule ^shop/?$ / [R=301,L]
+
+# /programs has no index page (only /programs/adult-bjj and /programs/kids-bjj)
+RewriteRule ^programs/?$ /#programs [R=302,NE,L]
 # TODO: confirm Gymdesk standalone URLs at cutover (src/config/gymdesk.ts)
 RewriteRule ^signup/?$ https://squareonejj.gymdesk.com/signup [R=302,L]
 RewriteRule ^login/?$ https://squareonejj.gymdesk.com/login [R=302,L]

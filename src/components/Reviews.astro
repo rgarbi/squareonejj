@@ -1,0 +1,35 @@
+---
+import { reviews, googleReviewsUrl, reviewSummary } from '../data/reviews';
+
+interface Props {
+  limit?: number;
+}
+
+const { limit = reviews.length } = Astro.props;
+
+const fmt = (ym: string) =>
+  new Date(`${ym}-01T12:00:00`).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+---
+
+<div class="grid gap-6 md:grid-cols-3">
+  {
+    reviews.slice(0, limit).map((r) => (
+      <figure class="flex flex-col rounded-(--radius) border border-border bg-surface p-6">
+        <p class="text-rating" aria-label={`${r.rating} out of 5 stars`}>
+          {'★'.repeat(r.rating)}
+        </p>
+        <blockquote class="mt-3 flex-1 text-foreground/90">
+          <p>“{r.text}”</p>
+        </blockquote>
+        <figcaption class="mt-4 text-sm text-muted-foreground">
+          {r.author} · Google review · {fmt(r.date)}
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>
+<p class="mt-6">
+  <a href={googleReviewsUrl} class="font-semibold text-primary-bright hover:underline" target="_blank" rel="noopener">
+    {reviewSummary ? `Read all ${reviewSummary.count} reviews on Google (${reviewSummary.rating}★) →` : 'Read all reviews on Google →'}
+  </a>
+</p>

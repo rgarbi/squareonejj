@@ -24,9 +24,9 @@ export const site = {
   },
   email: 'contact@squareonejj.com',
 
-  // TODO: copy the GBP address text verbatim (Unit vs Suite, St vs Street).
+  // Matches the Google Business Profile ("2 SW 4th St Ste d") — keep in sync.
   address: {
-    street: '2 SW 4th St, Unit D',
+    street: '2 SW 4th St, Ste D',
     city: "Lee's Summit",
     region: 'MO',
     postalCode: '64063',

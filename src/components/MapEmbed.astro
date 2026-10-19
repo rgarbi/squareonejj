@@ -1,0 +1,15 @@
+---
+import { site, formattedAddress } from '../data/site';
+
+// Keyless Google Maps embed, lazy-loaded so it costs nothing above the fold.
+const q = encodeURIComponent(`${site.name}, ${formattedAddress}`);
+---
+
+<div class="self-start overflow-hidden rounded-(--radius) border border-border">
+  <iframe
+    title={`Map to ${site.name}`}
+    src={`https://www.google.com/maps?q=${q}&output=embed`}
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    class="aspect-[4/3] w-full grayscale invert-[.9] hue-rotate-180"></iframe>
+</div>

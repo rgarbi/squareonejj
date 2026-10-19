@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import PricingTable from '../components/PricingTable.astro';
+import FaqList from '../components/FaqList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { plans } from '../data/pricing';
+import { faqs } from '../data/faq';
+import { site } from '../data/site';
+import { gymdesk } from '../config/gymdesk';
+
+const pricingFaqs = faqs.filter((f) => /contract|ages/i.test(f.q));
+
+const offerSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: `${site.name} memberships`,
+  itemListElement: [
+    {
+      '@type': 'Offer',
+      name: 'Free trial class',
+      price: 0,
+      priceCurrency: 'USD',
+      seller: { '@id': `${site.url}/#business` },
+    },
+    ...plans.map((p) => ({
+      '@type': 'Offer',
+      name: `${p.name} monthly membership`,
+      priceCurrency: 'USD',
+      priceSpecification: {
+        '@type': 'UnitPriceSpecification',
+        price: p.price,
+        priceCurrency: 'USD',
+        unitCode: 'MON',
+        referenceQuantity: { '@type': 'QuantitativeValue', value: 1, unitCode: 'MON' },
+      },
+      seller: { '@id': `${site.url}/#business` },
+    })),
+  ],
+};
+---
+
+<BaseLayout
+  breadcrumb="Pricing"
+  title="Pricing — Jiu Jitsu Memberships"
+  description="Square One Jiu Jitsu pricing: $175/month for one student, family plans from $290/month. Month-to-month, no contract, no enrollment fee. First class free. Lee's Summit, MO."
+  schema={[offerSchema]}
+>
+  <PageHero
+    eyebrow="Membership"
+    title="Simple, honest pricing"
+    lead="Monthly memberships for individuals and families. No contracts, no enrollment fee — and your first class is free."
+  />
+
+  <section class="container-page mt-20">
+    <PricingTable />
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a href="/free-trial" class="btn-primary">Start with a free class</a>
+      <a href={gymdesk.links.signup} class="btn-outline">Become a member</a>
+    </div>
+  </section>
+
+  <section class="container-page mt-24 grid gap-10 md:grid-cols-2">
+    <div>
+      {/* TODO: confirm with owners (docs/pricing-draft.md "What's included") */}
+      <SectionHeading title="What's included" />
+      <ul class="mt-6 space-y-3 text-muted-foreground">
+        <li class="flex gap-3"><span class="text-primary-bright" aria-hidden="true">✓</span>Unlimited classes in your age group — gi and nogi</li>
+        <li class="flex gap-3"><span class="text-primary-bright" aria-hidden="true">✓</span>Instruction from a black belt head coach</li>
+        <li class="flex gap-3"><span class="text-primary-bright" aria-hidden="true">✓</span>Online booking and account management</li>
+      </ul>
+    </div>
+    <div class="max-w-xl">
+      <SectionHeading title="Questions" />
+      <div class="mt-6"><FaqList items={pricingFaqs} /></div>
+    </div>
+  </section>
+
+  <CtaBand title="Try it before you join" />
+</BaseLayout>
