@@ -303,6 +303,7 @@ Before cutover, deploy to a Hostinger temporary domain or a `new.squareonejj.com
 4. Issue SSL on Hostinger and force HTTPS. Pick one canonical host (`squareonejj.com`, apex) and redirect `www` to it.
 5. Set the GitHub variable `SITE_ENV=production` and re-run the deploy (enables indexing and robots.txt).
 6. Smoke-test every page, every widget and every redirect, on mobile.
+7. Check that `https://squareonejj.com/robots.txt` is **ours** (it lists GPTBot, ClaudeBot etc. and a `Sitemap:` line). On the temporary `*.hostingersite.com` domain, Hostinger's CDN serves its own robots.txt instead (`Googlebot: Disallow`). Staging is still noindexed through our `<meta name="robots">`.
 
 **After launch**
 1. Submit the sitemap to Google Search Console and Bing Webmaster Tools, and request indexing.
@@ -319,7 +320,7 @@ Before cutover, deploy to a Hostinger temporary domain or a `new.squareonejj.com
 | M2 | Core pages | Home, programs, about, new-here (with FAQ), pricing, contact. **Built 2026-10-19** with DRAFT FAQ answers (`src/data/faq.ts` mirrors `docs/faq-draft.md`). |
 | M3 | Gymdesk | Schedule, trial form, contact form, signup/login/shop links, fallbacks. **Built 2026-10-19**: `/schedule` (live widget + static weekly grid), `/free-trial` (form `6kpYB`), `/thank-you` (noindex), contact form slot. Verified rendering in Chrome on 127.0.0.2. Blocked items are in §4.3. |
 | M4 | SEO / AI | JSON-LD, sitemap, robots, llms.txt, meta/OG, GA4 + events. **Built 2026-10-19.** Lighthouse (mobile, production build): Performance 99–100, Accessibility 100, SEO 100 on all pages tested. Best Practices fails only on local-HTTP checks, plus Gymdesk's third-party cookies on `/schedule`. |
-| M5 | QA | Lighthouse, a11y audit, cross-device testing, content proofread, owner review |
+| M5 | QA | Lighthouse, a11y audit, cross-device testing, content proofread, owner review. **Staging live 2026-10-19:** https://grey-octopus-742932.hostingersite.com (all routes, redirects, HTTPS, caching, Brotli and widgets verified). |
 | M6 | Launch | Cutover runbook (§10) |
 | M7 | Phase 2 | Location pages, blog, events, reviews page |
 
