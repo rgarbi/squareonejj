@@ -28,7 +28,7 @@ export const GET: APIRoute = () => {
 
   const body = `# ${site.name}
 
-> ${site.name} is a Brazilian Jiu-Jitsu (BJJ) academy in downtown ${site.address.city}, Missouri, in the Kansas City metro area. Founded in ${site.foundingYear} by Josh Smith (black belt under ${site.headCoach.promotedBy}) and Heidi Smith (purple belt). It is a ${site.affiliation.name} affiliate under ${site.affiliation.leader}. It offers gi and nogi classes for adults (13+) and kids (5–12). The first class is free; memberships are month-to-month with no contract and no enrollment fee.${reviewSummary ? ` Rated ${reviewSummary.rating} out of 5 from ${reviewSummary.count} Google reviews.` : ''}
+> ${site.name} is a Brazilian Jiu-Jitsu (BJJ) academy in downtown ${site.address.city}, Missouri, in the Kansas City metro area. Founded in ${site.foundingYear} by Josh Smith (black belt originally from ${site.headCoach.promotedBy}, later affiliated with ${site.affiliation.leader}) and Heidi Smith (purple belt). It is a ${site.affiliation.name} affiliate under ${site.affiliation.leader}. It offers gi and nogi classes for adults (13+) and kids (5–12). The first class is free; memberships are month-to-month with no contract and no enrollment fee.${reviewSummary ? ` Rated ${reviewSummary.rating} out of 5 from ${reviewSummary.count} Google reviews.` : ''}
 
 ## Location & contact
 - Address: ${formattedAddress}

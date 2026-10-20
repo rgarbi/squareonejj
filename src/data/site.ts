@@ -16,6 +16,7 @@ export const site = {
     name: 'Zenith BJJ',
     leader: 'Robert Drysdale',
   },
+  // Black belt originally from Renato Tavares; later affiliated with Robert Drysdale (Zenith BJJ).
   headCoach: { name: 'Josh Smith', rank: 'Black belt', promotedBy: 'Renato Tavares' },
 
   phone: {
