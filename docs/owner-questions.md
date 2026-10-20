@@ -18,6 +18,8 @@ Please answer inline, or just reply with the item numbers. Anything marked ⭐ b
    - "There's no self-made everybody."
 6. **"Years of building gyms and champions."** This phrase from the earlier draft is used in the About intro. Is it accurate?
 
+**Logo.** Do you have the logo as a **vector file** (SVG, AI, EPS or PDF), especially a version made for **dark backgrounds**? For now the site shows the logo on a white tile so the black belt stays black.
+
 ## 2. Location and visiting
 
 7. ⭐ **Parking.** Where should students park?

@@ -172,7 +172,7 @@ Dark theme, red accent, condensed athletic headings.
 ```
 
 - **Headings:** Barlow Condensed 600/700/800. **Body:** Archivo 400–700. Self-host both with `@fontsource` (no Google Fonts request).
-- **Logo:** the only source is the PNG on Gymdesk. Recreate it as an **SVG** (trace or redraw) and export favicon, apple-touch and OG image variants.
+- **Logo:** the only source is the PNG on Gymdesk. **Decision (2026-10-20):** on the dark site, show the original logo on a **white rounded tile** (`src/assets/brand/logo-tile.png`), so the black belt with its red bar stays black. An inverted all-white version made the belt read as a white belt, so it was removed. **Long-term:** get an official vector logo, ideally with a dark-background version, from the owners (owner question in the Team section).
 - Check that the red on near-black meets 4.5:1 contrast for text, and adjust lightness if it doesn't.
 
 ### 5.1 Photos
