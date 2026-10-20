@@ -17,9 +17,12 @@ import g17 from '../assets/photos/gallery-17.jpg';
 import g18 from '../assets/photos/gallery-18.jpg';
 import g21 from '../assets/photos/gallery-21.jpg';
 import g23 from '../assets/photos/gallery-23.jpeg';
+import g25 from '../assets/photos/gallery-25.jpeg';
 
 // TODO: owners to confirm which photos were taken at Square One (PLAN.md §5.1).
-const gallery = [
+// `wide` items span two columns: 11 photos fill a 4-column grid (and 2-column on mobile) exactly.
+const gallery: { src: ImageMetadata; alt: string; wide?: boolean }[] = [
+  { src: g25, alt: 'Square One adult gi class team photo on the mats', wide: true },
   { src: teamGi, alt: 'Square One team photo in gis' },
   { src: g14, alt: 'Square One nogi team photo' },
   { src: g23, alt: 'Square One kids class with their coaches' },
@@ -122,11 +125,17 @@ const personSchema = coaches.map((c) => ({
 
   <section id="gallery" class="container-page mt-24 scroll-mt-20">
     <SectionHeading eyebrow="Gallery" title="On the mats" />
-    <ul class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-5">
+    <ul class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
       {
         gallery.map((g) => (
-          <li>
-            <Image src={g.src} alt={g.alt} widths={[400, 700]} sizes="(min-width: 768px) 20vw, 50vw" class="aspect-square w-full rounded-(--radius) object-cover" />
+          <li class:list={[g.wide && 'col-span-2']}>
+            <Image
+              src={g.src}
+              alt={g.alt}
+              widths={g.wide ? [700, 1024] : [400, 700]}
+              sizes={g.wide ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 768px) 25vw, 50vw'}
+              class:list={['w-full rounded-(--radius) object-cover', g.wide ? 'aspect-[2/1] h-full md:aspect-auto' : 'aspect-square']}
+            />
           </li>
         ))
       }
