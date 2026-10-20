@@ -17,7 +17,7 @@ export const coaches: Coach[] = [
     role: 'Owner / Head Coach',
     rank: 'Black belt',
     jobTitle: 'Head Coach',
-    bio: "Josh co-founded Square One Jiu Jitsu Academy in downtown Lee's Summit in 2023 and serves as its head coach. Josh originally received his black belt from Renato Tavares and later became affiliated with Robert Drysdale and Zenith BJJ. He leads the academy's adult and youth programs with an emphasis on sound fundamentals, thoughtful instruction and a room where both everyday students and competitors can grow.",
+    bio: "Josh co-founded Square One Jiu Jitsu Academy in downtown Lee's Summit in 2023 and serves as its head coach. Josh received his black belt from Renato Tavares in 2023 and joined Robert Drysdale's Zenith BJJ team in 2026. He leads the academy's adult and youth programs with an emphasis on sound fundamentals, thoughtful instruction and a room where both everyday students and competitors can grow.",
   },
   {
     name: 'Heidi Smith',

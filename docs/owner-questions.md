@@ -9,7 +9,7 @@ Please answer inline, or just reply with the item numbers. Anything marked ⭐ b
 ## 1. About you and the team
 
 1. ⭐ **Other coaches.** Who else coaches (assistants, youth coaches)? For each: name, belt, role, a 1–2 sentence bio, and a photo if you have one.
-2. **Josh's background.** What year did you get your black belt from Renato Tavares, and when did you join Robert Drysdale / Zenith? Roughly how many years have you trained? Any competition results or titles you'd like mentioned?
+2. **Josh's background.** ✅ *Answered: black belt from Renato Tavares in 2023; joined Robert Drysdale / Zenith in 2026.* Still open: roughly how many years have you trained? Any competition results or titles you'd like mentioned?
 3. **Heidi's bio.** The site says: *"Heidi co-founded Square One with Josh in 2023. A purple belt, she helps lead the academy and builds the welcoming, family-centered culture…"* Is that accurate? Anything to add?
 4. **Zenith / Drysdale wording.** The About page says Robert Drysdale is *"co-founder and head coach of Zenith Jiu-Jitsu, ADCC Absolute champion and IBJJF World champion."* Is that okay to publish as written?
 5. **Values quotes.** These three quotes are attributed to Josh. Are they accurate, and okay to publish?

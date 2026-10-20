@@ -17,7 +17,7 @@ These are the canonical facts. Copy, JSON-LD and llms.txt are all generated from
 
 - **Business:** Square One Jiu Jitsu Academy, LLC. Opened in 2023 in downtown Lee's Summit, MO.
 - **Affiliation:** formal **Zenith BJJ** affiliate under **Robert Drysdale** (Zenith of Kansas City).
-- **Josh Smith:** Owner / Head Coach, **black belt**. Per Josh (2026-10-20): "originally received my black belt from Renato Tavares and later became affiliated with Robert Drysdale."
+- **Josh Smith:** Owner / Head Coach, **black belt from Renato Tavares (2023)**, **joined Robert Drysdale / Zenith BJJ (2026)**. Confirmed by Josh, 2026-10-20. Photo with Drysdale: `gallery-24.jpeg`.
 - **Heidi Smith:** Co-owner / Coach, **purple belt**.
 - **Programs:** Adult Gi, Adult Nogi (13+); Youth Jiu Jitsu, Youth Nogi (5–12).
 - **Phone:** (816) 287-0492. **Email:** contact@squareonejj.com.
