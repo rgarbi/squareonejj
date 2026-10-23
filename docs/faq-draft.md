@@ -47,7 +47,7 @@ Please mark each one **Approved** or edit the answer.
 **Status:** DRAFT · **Notes:**
 
 ## 7. Is jiu jitsu good for women? Are women welcome?
-**Draft:** Absolutely. Women train in every adult class at Square One, and our co-owner Heidi Smith is a purple belt and coach.
+**Draft:** Absolutely. Women train at Square One and are part of our coaching team.
 **Status:** DRAFT · **Notes:**
 
 ## 8. Do you have a competition team?

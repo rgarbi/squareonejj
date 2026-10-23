@@ -42,7 +42,7 @@ export const faqs: Faq[] = [
   },
   {
     q: 'Are women welcome?',
-    a: 'Absolutely. Women train in every adult class at Square One, and our co-owner Heidi Smith is a purple belt and coach.',
+    a: 'Absolutely. Women train at Square One and are part of our coaching team.',
     status: 'draft',
     audience: ['general', 'adult'],
   },

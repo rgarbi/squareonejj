@@ -54,7 +54,7 @@ const personSchema = coaches.map((c) => ({
   <PageHero
     eyebrow="About"
     title="Starting from square one"
-    lead="Founded in downtown Lee's Summit in 2023 by Josh and Heidi Smith — after years of building gyms and champions, they started again from square one."
+    lead="Founded in downtown Lee's Summit in 2023, Square One is built by its students, families and coaches — together, from square one."
   />
 
   <section class="container-page mt-20 grid items-center gap-10 lg:grid-cols-2">
@@ -64,7 +64,7 @@ const personSchema = coaches.map((c) => ({
         and in nogi.
       </p>
       <p>
-        Josh and Heidi built Square One as a place where adults and kids can learn jiu-jitsu through clear instruction,
+        Square One is a place where adults and kids can learn jiu-jitsu through clear instruction,
         strong fundamentals and a welcoming team culture — for students who want to learn, stay active and keep growing on
         the mat, whether they plan to compete or not.
       </p>
@@ -109,13 +109,12 @@ const personSchema = coaches.map((c) => ({
   </section>
 
   <section class="container-page mt-24">
-    <SectionHeading eyebrow="What we value" title="Our values" lead="In head coach Josh Smith's words." />
+    <SectionHeading eyebrow="What we value" title="Our values" lead="What our team believes." />
     <div class="mt-10 grid gap-6 md:grid-cols-3">
       {
         values.map((v) => (
           <article class="rounded-(--radius) border border-border bg-surface p-6">
             <h3 class="text-2xl">{v.title}</h3>
-            <blockquote class="mt-3 border-l-4 border-primary pl-4 text-lg">“{v.quote}”</blockquote>
             <p class="mt-3 text-muted-foreground">{v.body}</p>
           </article>
         ))

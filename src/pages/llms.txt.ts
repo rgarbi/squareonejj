@@ -59,7 +59,7 @@ Details: ${url('/pricing')}
 ${coaches.map((c) => `- ${c.name} — ${c.rank}, ${c.role}. ${c.bio}`).join('\n')}
 
 ## Values
-${values.map((v) => `- ${v.title}: "${v.quote}" ${v.body}`).join('\n')}
+${values.map((v) => `- ${v.title}: ${v.body}`).join('\n')}
 
 ## FAQ
 ${faqs.map((f) => `### ${f.q}\n${f.a}`).join('\n\n')}

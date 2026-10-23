@@ -10,13 +10,13 @@ Please answer inline, or just reply with the item numbers. Anything marked ⭐ b
 
 1. ⭐ **Other coaches.** Who else coaches (assistants, youth coaches)? For each: name, belt, role, a 1–2 sentence bio, and a photo if you have one.
 2. **Josh's background.** ✅ *Answered: black belt from Renato Tavares in 2023; joined Robert Drysdale / Zenith in 2026.* Still open: roughly how many years have you trained? Any competition results or titles you'd like mentioned?
-3. **Heidi's bio.** The site says: *"Heidi co-founded Square One with Josh in 2023. A purple belt, she helps lead the academy and builds the welcoming, family-centered culture…"* Is that accurate? Anything to add?
+3. **Heidi's bio.** The site says: *"Heidi co-founded Square One with Josh in 2023. A purple belt, she leads the academy's youth program and builds the welcoming, family-centered culture…"* Is that accurate? Anything to add?
 4. **Zenith / Drysdale wording.** The About page says Robert Drysdale is *"co-founder and head coach of Zenith Jiu-Jitsu, ADCC Absolute champion and IBJJF World champion."* Is that okay to publish as written?
-5. **Values quotes.** These three quotes are attributed to Josh. Are they accurate, and okay to publish?
+5. **Values quotes.** *Removed from the site for now. The values show in team voice (title and description only).* These three quotes came from the earlier prototype and were attributed to Josh. If any are accurate and you'd like one back, tell us whether to credit Josh or phrase it as a team saying.
    - "Jiu-jitsu needs hobbyists. That's how the sport grows."
    - "I want my students to start where I was halfway through my journey."
    - "There's no self-made everybody."
-6. **"Years of building gyms and champions."** This phrase from the earlier draft is used in the About intro. Is it accurate?
+6. **"Years of building gyms and champions."** *No longer on the site. The About intro now focuses on the team.* If it's accurate and you'd like it in a coach bio, let us know.
 
 **Logo.** Do you have the logo as a **vector file** (SVG, AI, EPS or PDF), especially a version made for **dark backgrounds**? For now the site shows the logo on a white tile so the black belt stays black.
 
