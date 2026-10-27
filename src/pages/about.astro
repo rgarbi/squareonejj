@@ -78,7 +78,7 @@ const personSchema = coaches.map((c) => ({
       {
         coaches.map((c) => (
           <article class="rounded-(--radius) border border-border bg-surface p-6">
-            <p class="eyebrow">{c.rank} · {c.role}</p>
+            <p class="eyebrow">{c.rank ? `${c.rank} · ${c.role}` : c.role}</p>
             <h3 class="mt-2 text-3xl">{c.name}</h3>
             <p class="mt-3 text-muted-foreground">{c.bio}</p>
           </article>

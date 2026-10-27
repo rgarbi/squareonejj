@@ -141,7 +141,7 @@ export function localBusinessSchema() {
         bestRating: 5,
       },
     }),
-    founder: coaches.map((c) => ({ '@type': 'Person', name: c.name })),
+    founder: coaches.filter((c) => c.founder).map((c) => ({ '@type': 'Person', name: c.name })),
     employee: coaches.map((c) => ({ '@type': 'Person', name: c.name, jobTitle: c.jobTitle })),
     memberOf: {
       '@type': 'SportsOrganization',

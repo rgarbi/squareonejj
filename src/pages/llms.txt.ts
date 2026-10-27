@@ -56,7 +56,7 @@ ${pricingTerms.map((t) => `- ${t}`).join('\n')}
 Details: ${url('/pricing')}
 
 ## Coaches
-${coaches.map((c) => `- ${c.name} — ${c.rank}, ${c.role}. ${c.bio}`).join('\n')}
+${coaches.map((c) => `- ${c.name} — ${c.rank ? `${c.rank}, ` : ''}${c.role}. ${c.bio}`).join('\n')}
 
 ## Values
 ${values.map((v) => `- ${v.title}: ${v.body}`).join('\n')}
