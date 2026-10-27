@@ -28,7 +28,7 @@ export const GET: APIRoute = () => {
 
   const body = `# ${site.name}
 
-> ${site.name} is a Brazilian Jiu-Jitsu (BJJ) academy in downtown ${site.address.city}, Missouri, in the Kansas City metro area. Founded in ${site.foundingYear} by Josh Smith (black belt from ${site.headCoach.promotedBy} in ${site.headCoach.blackBeltYear}; joined ${site.affiliation.leader}'s ${site.affiliation.name} in ${site.headCoach.zenithYear}) and Heidi Smith (purple belt). It is a ${site.affiliation.name} affiliate under ${site.affiliation.leader}. It offers gi and nogi classes for adults (13+) and kids (5–12). The first class is free; memberships are month-to-month with no contract and no enrollment fee.${reviewSummary ? ` Rated ${reviewSummary.rating} out of 5 from ${reviewSummary.count} Google reviews.` : ''}
+> ${site.name} is a Brazilian Jiu-Jitsu (BJJ) academy in downtown ${site.address.city}, Missouri, in the Kansas City metro area. Founded in ${site.foundingYear} by Josh Smith (black belt from ${site.headCoach.promotedBy} in ${site.headCoach.blackBeltYear}; joined ${site.affiliation.leader}'s ${site.affiliation.name} in ${site.headCoach.zenithYear}) and Heidi Smith (purple belt). It is a ${site.affiliation.name} affiliate under ${site.affiliation.leader}. It offers Gi and No-Gi classes for adults (13+) and kids (5–12). The first class is free; memberships are month-to-month with no contract and no enrollment fee.${reviewSummary ? ` Rated ${reviewSummary.rating} out of 5 from ${reviewSummary.count} Google reviews.` : ''}
 
 ## Location & contact
 - Address: ${formattedAddress}
@@ -39,9 +39,9 @@ export const GET: APIRoute = () => {
 
 ## Programs
 - Adult Gi (ages 13+): jiu-jitsu in the traditional uniform. ${url('/programs/adult-bjj')}
-- Adult Nogi (ages 13+): grappling in rash guard and shorts. ${url('/programs/adult-bjj')}
+- Adult No-Gi (ages 13+): grappling in rash guard and shorts. ${url('/programs/adult-bjj')}
 - Youth Jiu Jitsu (ages 5–12, gi). ${url('/programs/kids-bjj')}
-- Youth Nogi (ages 5–12). ${url('/programs/kids-bjj')}
+- Youth No-Gi (ages 5–12). ${url('/programs/kids-bjj')}
 
 ## Weekly class schedule
 ${scheduleLines}

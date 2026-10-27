@@ -18,7 +18,7 @@ export const faqs: Faq[] = [
   },
   {
     q: 'What ages do you teach?',
-    a: 'Our youth classes (Youth Jiu Jitsu and Youth Nogi) are for kids ages 5 to 12. Students 13 and older train in our adult classes (Adult Gi and Adult Nogi). The minimum age is 5.',
+    a: 'Our youth classes (Youth Jiu Jitsu and Youth No-Gi) are for kids ages 5 to 12. Students 13 and older train in our adult classes (Adult Gi and Adult No-Gi). The minimum age is 5.',
     status: 'draft',
     audience: ['general', 'kids'],
   },
@@ -47,8 +47,8 @@ export const faqs: Faq[] = [
     audience: ['general', 'adult'],
   },
   {
-    q: "What's the difference between gi and nogi?",
-    a: 'Gi classes train in the traditional jiu-jitsu uniform (kimono), where grips on the collar and sleeves shape the game. Nogi classes train in athletic clothing — rash guard and shorts — with a faster, grip-light style. Both teach the same core grappling, and many students train both.',
+    q: "What's the difference between Gi and No-Gi?",
+    a: 'Gi classes train in the traditional jiu-jitsu uniform (kimono), where grips on the collar and sleeves shape the game. No-Gi classes train in athletic clothing, rash guard and shorts. No-Gi is a faster style of grappling. Both teach the same core grappling, and many students train both.',
     status: 'draft',
     audience: ['general', 'adult', 'kids'],
   },

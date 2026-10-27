@@ -101,7 +101,7 @@ export function localBusinessSchema() {
     name: site.name,
     alternateName: site.shortName,
     legalName: site.legalName,
-    description: `${site.tagline} Brazilian Jiu-Jitsu academy offering Adult Gi, Adult Nogi, Youth Jiu Jitsu and Youth Nogi classes. Zenith BJJ affiliate under Robert Drysdale. First class free.`,
+    description: `${site.tagline} Brazilian Jiu-Jitsu academy offering Adult Gi, Adult No-Gi, Youth Jiu Jitsu and Youth No-Gi classes. Zenith BJJ affiliate under Robert Drysdale. First class free.`,
     url: site.url,
     telephone: site.phone.e164,
     email: site.email,
@@ -132,7 +132,7 @@ export function localBusinessSchema() {
       closes: h.closes,
     })),
     sameAs: [...Object.values(site.socials), site.mapsUrl],
-    knowsAbout: ['Brazilian Jiu-Jitsu', 'Grappling', 'Nogi grappling', 'Kids martial arts', 'Self-defense'],
+    knowsAbout: ['Brazilian Jiu-Jitsu', 'Grappling', 'No-Gi grappling', 'Kids martial arts', 'Self-defense'],
     ...(reviewSummary && {
       aggregateRating: {
         '@type': 'AggregateRating',

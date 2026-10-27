@@ -49,11 +49,11 @@ export type Day = 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday' | '
 
 export type Program = 'adult-gi' | 'adult-nogi' | 'youth-gi' | 'youth-nogi';
 
-export const programs: Record<Program, { name: string; audience: 'Adult' | 'Youth'; style: 'Gi' | 'Nogi' }> = {
+export const programs: Record<Program, { name: string; audience: 'Adult' | 'Youth'; style: 'Gi' | 'No-Gi' }> = {
   'adult-gi': { name: 'Adult Gi', audience: 'Adult', style: 'Gi' },
-  'adult-nogi': { name: 'Adult Nogi', audience: 'Adult', style: 'Nogi' },
+  'adult-nogi': { name: 'Adult No-Gi', audience: 'Adult', style: 'No-Gi' },
   'youth-gi': { name: 'Youth Jiu Jitsu', audience: 'Youth', style: 'Gi' },
-  'youth-nogi': { name: 'Youth Nogi', audience: 'Youth', style: 'Nogi' },
+  'youth-nogi': { name: 'Youth No-Gi', audience: 'Youth', style: 'No-Gi' },
 };
 
 /** 24h "HH:MM" times. Static fallback for the Gymdesk schedule widget. */
