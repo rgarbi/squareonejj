@@ -31,7 +31,10 @@ if (props.kind === 'form') {
 }
 ---
 
-<div class:list={['gymdesk-widget', props.kind === 'form' && 'rounded-(--radius) bg-white p-2 sm:p-4']}>
+<div
+  class:list={['gymdesk-widget', props.kind === 'form' && 'rounded-(--radius) bg-white p-2 sm:p-4']}
+  style={`--frame-min-height:${minHeight}px`}
+>
   <div class={className} {...attrs} data-frame-title={frameTitle} style={`min-height:${minHeight}px`}></div>
   <noscript><slot /></noscript>
 </div>
@@ -57,5 +60,7 @@ if (props.kind === 'form') {
   .gymdesk-widget :global(iframe) {
     width: 100%;
     border: 0;
+    /* widgets.js sets an inline min-height:400px, which clips the booking form. */
+    min-height: var(--frame-min-height) !important;
   }
 </style>
