@@ -31,19 +31,18 @@ export const coaches: Coach[] = [
     founder: true,
     bio: "Heidi co-founded Square One with Josh in 2023. A purple belt, she leads the academy's youth program and builds the welcoming, family-centered culture that Square One brings to adults and kids in Lee's Summit.",
   },
-  // TODO: confirm bios with Josh.
   {
     name: 'Eric Ohler',
     role: 'Coach',
     rank: 'Purple belt',
     jobTitle: 'Jiu-Jitsu Coach',
-    bio: 'Eric is a purple belt and a coach at Square One, helping students of every level build strong fundamentals on the mat.',
+    bio: 'Coach Eric is an accomplished grappler and purple belt with seven years of jiu-jitsu experience. He helps coach the adult team, both in class and at tournaments.',
   },
   {
     name: 'Bradley Brattin',
     role: 'Wrestling Coach',
     jobTitle: 'Wrestling Coach',
-    bio: "Bradley is Square One's wrestling coach, bringing takedowns, top pressure and scrambling skills to the academy's grappling training.",
+    bio: 'Coach Brad is a longtime wrestler with prior MMA experience who coaches wrestling at the middle and high school levels. At Square One, he helps everyone sharpen their stand-up game.',
   },
 ];
 
