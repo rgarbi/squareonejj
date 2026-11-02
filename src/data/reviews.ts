@@ -13,8 +13,8 @@ export interface Review {
 
 export const googleReviewsUrl = 'https://maps.app.goo.gl/zTGz4gndt5DXWKRH6';
 
-/** Real totals from the GBP (as of 2026-10-19). Update when refreshing reviews. */
-export const reviewSummary: { rating: number; count: number; asOf: string } | null = { rating: 4.9, count: 79, asOf: '2026-10-19' };
+/** Real totals from the GBP (as of 2026-11-02). Update when refreshing reviews. */
+export const reviewSummary: { rating: number; count: number; asOf: string } | null = { rating: 5, count: 81, asOf: '2026-11-02' };
 
 export const reviews: Review[] = [
   {

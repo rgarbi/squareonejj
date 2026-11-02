@@ -22,7 +22,7 @@ These are the canonical facts. Copy, JSON-LD and llms.txt are all generated from
 - **Programs:** Adult Gi, Adult Nogi (13+); Youth Jiu Jitsu, Youth Nogi (5–12).
 - **Phone:** (816) 287-0492. **Email:** contact@squareonejj.com.
 - **Address:** **2 SW 4th St, Ste D**, Lee's Summit, MO 64063. This matches the Google Business Profile, which shows "2 SW 4th St Ste d" (read from the Maps embed on 2026-10-19).
-- **Google rating:** **4.9★ from 79 reviews** (GBP, 2026-10-19). Used in `src/data/reviews.ts` and for AggregateRating.
+- **Google rating:** **5.0★ from 81 reviews** (GBP, 2026-11-02). Used in `src/data/reviews.ts` and for AggregateRating.
 - **Hours** (derived from the class schedule; no open mat):
 
 | Day | Hours |
