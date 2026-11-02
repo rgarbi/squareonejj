@@ -19,8 +19,9 @@ RewriteRule ^ https://squareonejj.com%{REQUEST_URI} [R=301,L]
 # Shared booking links for a specific session (e.g. a seminar: /book?date=…&s=…&schedule=…)
 # go straight to Gymdesk's booking page; the query string carries over.
 # squareonejj.gymdesk.com/book bounces back here while the custom domain is set in Gymdesk.
+# /schedule is included because browsers cached the old /book -> /schedule 301 (query kept).
 RewriteCond %{QUERY_STRING} (^|&)s=[0-9]+
-RewriteRule ^book/?$ https://app.gymdesk.com/widgets/book/render/gym/D2OOb [R=302,L]
+RewriteRule ^(book|schedule)/?$ https://app.gymdesk.com/widgets/book/render/gym/D2OOb [R=302,L]
 RewriteRule ^book/?$ /schedule [R=301,L]
 RewriteRule ^gallery/?$ /about#gallery [R=301,NE,L]
 RewriteRule ^shop/?$ / [R=301,L]
