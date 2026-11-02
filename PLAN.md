@@ -289,7 +289,7 @@ Before cutover, deploy to a Hostinger temporary domain or a `new.squareonejj.com
 
 | Old path | New path |
 |---|---|
-| `/book` | `/schedule` |
+| `/book` | Same path (booking widget for shared session links, e.g. seminars) |
 | `/signup` | Gymdesk signup URL |
 | `/login` | Gymdesk login URL |
 | `/shop` | `/` (the shop is not enabled) |

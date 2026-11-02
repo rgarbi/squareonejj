@@ -1,0 +1,41 @@
+---
+// Booking page for shared Gymdesk session links, e.g. a seminar:
+// /book?date=2026-11-15&s=1733740&schedule=8448 (the old Gymdesk-site URL format).
+// widgets.js reads `date` and `s` from this page's URL itself; `schedule` is only read
+// from the widget's attr-schedule, so the script below copies it across.
+// Not indexed (it duplicates /schedule), excluded from the sitemap.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Gymdesk from '../components/Gymdesk.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout breadcrumb="Book" title="Book a Class or Event" noindex>
+  <PageHero
+    eyebrow="Book"
+    title="Reserve your spot"
+    lead="Pick your session, fill in your details and you're on the list."
+  >
+    <p class="mt-6 text-sm text-muted-foreground">
+      Questions? Call <a href={`tel:${site.phone.e164}`} class="font-semibold text-primary-bright hover:underline">{site.phone.display}</a>
+      or see the full <a href="/schedule" class="font-semibold text-primary-bright hover:underline">class schedule</a>.
+    </p>
+  </PageHero>
+
+  <section class="container-page mt-12">
+    <Gymdesk kind="booking" theme="dark" minHeight={900}>
+      <p class="text-muted-foreground">
+        Enable JavaScript to book online, or call us at
+        <a href={`tel:${site.phone.e164}`} class="text-primary-bright hover:underline">{site.phone.display}</a>.
+      </p>
+    </Gymdesk>
+  </section>
+
+  <script is:inline>
+    // Runs before the async widgets.js, which builds the booking iframe from these attributes.
+    var schedule = new URLSearchParams(location.search).get('schedule');
+    if (schedule && /^\d+$/.test(schedule)) {
+      document.querySelector('.gymdesk-booking').setAttribute('attr-schedule', schedule);
+    }
+  </script>
+</BaseLayout>
