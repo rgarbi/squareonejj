@@ -2,8 +2,9 @@
 /**
  * Gymdesk widget embed (PLAN.md §4.1). widgets.js renders each placeholder as an iframe.
  * - Loaded once per page and only on pages that use a widget (it pulls in jQuery).
- * - Schedule and booking support theme="dark"; forms only have a light template,
- *   so they sit on a white card.
+ * - Schedule and booking support theme="dark"; forms only have a light template.
+ *   Light widgets sit on a white card. (Booking's dark theme only darkens the field
+ *   panel and leaves the rest white, so booking uses light.)
  * - Widgets don't render on localhost/127.0.0.1 — use a LAN IP or 127.0.0.2.
  * The slot is a fallback shown under the widget's reserved space for no-JS visitors.
  */
@@ -19,6 +20,7 @@ const props = Astro.props;
 const defaultTitles = { schedule: 'Class schedule and booking', booking: 'Book a class', form: 'Form' };
 const frameTitle = props.title ?? defaultTitles[props.kind];
 const minHeight = props.minHeight ?? (props.kind === 'form' ? 560 : 700);
+const onCard = props.kind === 'form' || props.theme === 'light';
 
 const attrs: Record<string, string> = { 'attr-gym': gymdesk.gymId };
 let className: string;
@@ -32,7 +34,7 @@ if (props.kind === 'form') {
 ---
 
 <div
-  class:list={['gymdesk-widget', props.kind === 'form' && 'rounded-(--radius) bg-white p-2 sm:p-4']}
+  class:list={['gymdesk-widget', onCard && 'rounded-(--radius) bg-white p-2 sm:p-4']}
   style={`--frame-min-height:${minHeight}px`}
 >
   <div class={className} {...attrs} data-frame-title={frameTitle} style={`min-height:${minHeight}px`}></div>
@@ -53,6 +55,16 @@ if (props.kind === 'form') {
         f.title = f.parentElement.getAttribute('data-frame-title');
       });
     }).observe(document.body, { childList: true, subtree: true });
+
+    // widgets.js scrolls the iframe's top to the viewport top on 'scrollToTop', which
+    // puts it under the sticky header. Nudge it back down once that scroll has run.
+    window.addEventListener('message', function (e) {
+      if (e.origin !== 'https://app.gymdesk.com' || !Array.isArray(e.data) || e.data[0] !== 'scrollToTop') return;
+      setTimeout(function () {
+        var header = document.querySelector('header');
+        if (header) window.scrollBy(0, -header.offsetHeight - 16);
+      }, 0);
+    });
   }
 </script>
 
