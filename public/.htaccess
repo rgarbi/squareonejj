@@ -16,6 +16,11 @@ RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^ https://squareonejj.com%{REQUEST_URI} [R=301,L]
 
 # --- Legacy Gymdesk URLs ---
+# Shared booking links for a specific session (e.g. a seminar: /book?date=…&s=…&schedule=…)
+# go straight to Gymdesk's booking page; the query string carries over.
+# squareonejj.gymdesk.com/book bounces back here while the custom domain is set in Gymdesk.
+RewriteCond %{QUERY_STRING} (^|&)s=[0-9]+
+RewriteRule ^book/?$ https://app.gymdesk.com/widgets/book/render/gym/D2OOb [R=302,L]
 RewriteRule ^book/?$ /schedule [R=301,L]
 RewriteRule ^gallery/?$ /about#gallery [R=301,NE,L]
 RewriteRule ^shop/?$ / [R=301,L]
