@@ -58,27 +58,27 @@ export const programs: Record<Program, { name: string; audience: 'Adult' | 'Yout
 
 /** 24h "HH:MM" times. Static fallback for the Gymdesk schedule widget. */
 export const schedule: { day: Day; program: Program; start: string; end: string }[] = [
-  { day: 'Monday', program: 'adult-gi', start: '06:00', end: '07:30' },
+  { day: 'Monday', program: 'adult-gi', start: '06:00', end: '07:00' },
   { day: 'Monday', program: 'youth-gi', start: '17:30', end: '18:30' },
   { day: 'Monday', program: 'adult-nogi', start: '19:00', end: '20:30' },
   { day: 'Tuesday', program: 'youth-gi', start: '17:30', end: '18:30' },
   { day: 'Tuesday', program: 'adult-gi', start: '19:00', end: '20:30' },
-  { day: 'Wednesday', program: 'adult-gi', start: '06:00', end: '07:30' },
+  { day: 'Wednesday', program: 'adult-gi', start: '06:00', end: '07:00' },
   { day: 'Wednesday', program: 'adult-nogi', start: '19:00', end: '20:30' },
   { day: 'Thursday', program: 'youth-nogi', start: '17:30', end: '18:30' },
   { day: 'Thursday', program: 'adult-gi', start: '19:00', end: '20:30' },
-  { day: 'Friday', program: 'adult-nogi', start: '06:00', end: '07:30' },
+  { day: 'Friday', program: 'adult-nogi', start: '06:00', end: '07:00' },
 ];
 
 /** Opening hours follow the class schedule (no open mat). Must match the GBP. */
 export const hours: { day: Day; opens: string; closes: string }[] = [
-  { day: 'Monday', opens: '06:00', closes: '07:30' },
+  { day: 'Monday', opens: '06:00', closes: '07:00' },
   { day: 'Monday', opens: '17:30', closes: '20:30' },
   { day: 'Tuesday', opens: '17:30', closes: '20:30' },
-  { day: 'Wednesday', opens: '06:00', closes: '07:30' },
+  { day: 'Wednesday', opens: '06:00', closes: '07:00' },
   { day: 'Wednesday', opens: '19:00', closes: '20:30' },
   { day: 'Thursday', opens: '17:30', closes: '20:30' },
-  { day: 'Friday', opens: '06:00', closes: '07:30' },
+  { day: 'Friday', opens: '06:00', closes: '07:00' },
 ];
 
 export const days: Day[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
