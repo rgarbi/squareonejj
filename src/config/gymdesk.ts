@@ -23,7 +23,7 @@ export const gymdesk = {
    */
   trialBookingEnabled: false,
 
-  // TODO: verify at cutover — available once the Gymdesk-hosted site is unpublished.
+  // Verified 2026-11-04 after removing squareonejj.com as the Gymdesk custom domain.
   links: {
     signup: 'https://squareonejj.gymdesk.com/signup',
     login: 'https://squareonejj.gymdesk.com/login',

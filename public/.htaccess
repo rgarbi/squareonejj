@@ -25,8 +25,10 @@ RewriteRule ^shop/?$ / [R=301,L]
 
 # /programs has no index page (only /programs/adult-bjj and /programs/kids-bjj)
 RewriteRule ^programs/?$ /#programs [R=302,NE,L]
-# TODO: confirm Gymdesk standalone URLs at cutover (src/config/gymdesk.ts)
+# Gymdesk signup/login (src/config/gymdesk.ts). squareonejj.com was Gymdesk's custom domain
+# until 2026-11-04, so invite emails sent before then link to /signup/i/<id>-<token> here.
 RewriteRule ^signup/?$ https://squareonejj.gymdesk.com/signup [R=302,L]
+RewriteRule ^signup/(.+)$ https://squareonejj.gymdesk.com/signup/$1 [R=302,L]
 RewriteRule ^login/?$ https://squareonejj.gymdesk.com/login [R=302,L]
 
 # --- Clean URLs ---

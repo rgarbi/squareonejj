@@ -120,9 +120,9 @@ Program pages are organized by **audience** (adult / kids), not gi / nogi, becau
 |---|---|---|
 | **Trial form ref** | `6kpYB` | Received |
 | **Contact form ref** | `6ayyZ` | Received (custom embed-only form; the Gymdesk site's built-in contact form is untouched) |
-| **Gymdesk subdomain** | `https://squareonejj.gymdesk.com`, which currently 301s to squareonejj.com | Verified |
-| **Signup URL** | probably `https://squareonejj.gymdesk.com/signup` | **To verify** once the custom domain is detached or the site unpublished, or ask Gymdesk support |
-| **Login URL** | probably `https://squareonejj.gymdesk.com/login` | **To verify** (same) |
+| **Gymdesk subdomain** | `https://squareonejj.gymdesk.com` | Verified (stopped redirecting to squareonejj.com on 2026-11-04 when the custom domain was removed) |
+| **Signup URL** | `https://squareonejj.gymdesk.com/signup` (invites: `/signup/i/<id>-<token>`) | **Verified 2026-11-04** after removing the Gymdesk custom domain. `.htaccess` forwards `/signup` and `/signup/*` there. |
+| **Login URL** | `https://squareonejj.gymdesk.com/login` | **Verified 2026-11-04** |
 | **Shop** | Not enabled. Don't put a Shop link in v1. | Decided |
 
 Behavior that matters:
