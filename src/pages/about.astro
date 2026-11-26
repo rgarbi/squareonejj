@@ -8,7 +8,7 @@ import { coaches, values } from '../data/coaches';
 import { site } from '../data/site';
 import teamGi from '../assets/photos/gallery-2.jpg';
 import lineagePhoto from '../assets/photos/gallery-24.jpeg';
-import promotionPhoto from '../assets/rob-josh-collage-2.jpeg';
+import promotionPhoto from '../assets/josh-promotion-first-degree.jpeg';
 import promotionCollage from '../assets/rob-josh-collage-1.jpeg';
 import g4 from '../assets/photos/gallery-4.jpg';
 import g13 from '../assets/photos/gallery-13.jpg';
@@ -106,13 +106,13 @@ const personSchema = coaches.map((c) => ({
         </p>
       </div>
     </div>
-    <div class="grid items-start gap-6 sm:grid-cols-5">
-      <figure class="sm:col-span-3">
-        <Image src={promotionPhoto} alt="Robert Drysdale tying a stripe onto Professor Josh Smith's black belt, then embracing him, at Josh's promotion to 1st degree black belt" widths={[400, 768, 1136]} sizes="(min-width: 1024px) 330px, (min-width: 640px) 60vw, 100vw" class="w-full rounded-(--radius) object-cover" />
+    <div class="grid items-start gap-6 sm:grid-cols-2">
+      <figure class="mx-auto w-full max-w-xs sm:max-w-none">
+        <Image src={promotionPhoto} alt="Robert Drysdale tying a stripe onto Professor Josh Smith's black belt at Josh's promotion to 1st degree black belt" widths={[400, 768]} sizes="(min-width: 1024px) 275px, (min-width: 640px) 50vw, 100vw" class="aspect-[3/4] w-full rounded-(--radius) object-cover" />
         <figcaption class="mt-2 text-center text-sm text-muted-foreground">Josh's promotion to 1st degree black belt under Robert Drysdale, 2026</figcaption>
       </figure>
-      <figure class="mx-auto w-full max-w-xs sm:col-span-2 sm:max-w-none">
-        <Image src={lineagePhoto} alt="Professor Josh Smith (right) with Robert Drysdale (left), both wearing black belts" widths={[400, 768]} sizes="(min-width: 1024px) 220px, (min-width: 640px) 40vw, 100vw" class="w-full rounded-(--radius) object-cover" />
+      <figure class="mx-auto w-full max-w-xs sm:max-w-none">
+        <Image src={lineagePhoto} alt="Professor Josh Smith (right) with Robert Drysdale (left), both wearing black belts" widths={[400, 768]} sizes="(min-width: 1024px) 275px, (min-width: 640px) 50vw, 100vw" class="w-full rounded-(--radius) object-cover" />
         <figcaption class="mt-2 text-center text-sm text-muted-foreground">Robert Drysdale and Professor Josh Smith</figcaption>
       </figure>
     </div>
