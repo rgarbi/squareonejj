@@ -9,6 +9,7 @@ import { site } from '../data/site';
 import teamGi from '../assets/photos/gallery-2.jpg';
 import lineagePhoto from '../assets/photos/gallery-24.jpeg';
 import promotionPhoto from '../assets/rob-josh-collage-2.jpeg';
+import promotionCollage from '../assets/rob-josh-collage-1.jpeg';
 import g4 from '../assets/photos/gallery-4.jpg';
 import g13 from '../assets/photos/gallery-13.jpg';
 import g14 from '../assets/photos/gallery-14.jpg';
@@ -21,8 +22,9 @@ import g23 from '../assets/photos/gallery-23.jpeg';
 import g25 from '../assets/photos/gallery-25.jpeg';
 
 // TODO: owners to confirm which photos were taken at Square One (PLAN.md §5.1).
-// `wide` items span two columns: 11 photos fill a 4-column grid (and 2-column on mobile) exactly.
-const gallery: { src: ImageMetadata; alt: string; wide?: boolean }[] = [
+// `wide` items span two columns and `full` items span the whole row, so these photos fill a
+// 4-column grid (and 2-column on mobile) exactly.
+const gallery: { src: ImageMetadata; alt: string; wide?: boolean; full?: boolean }[] = [
   { src: g25, alt: 'Square One adult gi class team photo on the mats', wide: true },
   { src: teamGi, alt: 'Square One team photo in gis' },
   { src: g14, alt: 'Square One No-Gi team photo' },
@@ -34,6 +36,7 @@ const gallery: { src: ImageMetadata; alt: string; wide?: boolean }[] = [
   { src: g13, alt: 'Square One teammates at a tournament' },
   { src: g17, alt: 'Students celebrating a belt promotion' },
   { src: g21, alt: 'A Square One competitor has his hand raised at a tournament' },
+  { src: promotionCollage, alt: "Robert Drysdale promoting Professor Josh Smith to 1st degree black belt: checking the belt, tying on the stripe and an embrace", full: true },
 ];
 
 const personSchema = coaches.map((c) => ({
@@ -134,13 +137,13 @@ const personSchema = coaches.map((c) => ({
     <ul class="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
       {
         gallery.map((g) => (
-          <li class:list={[g.wide && 'col-span-2']}>
+          <li class:list={[g.wide && 'col-span-2', g.full && 'col-span-2 md:col-span-4']}>
             <Image
               src={g.src}
               alt={g.alt}
-              widths={g.wide ? [700, 1024] : [400, 700]}
-              sizes={g.wide ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 768px) 25vw, 50vw'}
-              class:list={['w-full rounded-(--radius) object-cover', g.wide ? 'aspect-[2/1] h-full md:aspect-auto' : 'aspect-square']}
+              widths={g.full ? [700, 1024, 1280] : g.wide ? [700, 1024] : [400, 700]}
+              sizes={g.full ? '100vw' : g.wide ? '(min-width: 768px) 50vw, 100vw' : '(min-width: 768px) 25vw, 50vw'}
+              class:list={['w-full rounded-(--radius) object-cover', g.full ? 'aspect-video' : g.wide ? 'aspect-[2/1] h-full md:aspect-auto' : 'aspect-square']}
             />
           </li>
         ))
