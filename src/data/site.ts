@@ -16,8 +16,8 @@ export const site = {
     name: 'Zenith BJJ',
     leader: 'Robert Drysdale',
   },
-  // Black belt from Renato Tavares (2023); joined Robert Drysdale / Zenith BJJ (2026).
-  headCoach: { name: 'Josh Smith', rank: 'Black belt', promotedBy: 'Renato Tavares', blackBeltYear: 2023, zenithYear: 2026 },
+  // 1st degree black belt under Robert Drysdale; joined Zenith BJJ (2026).
+  headCoach: { name: 'Josh Smith', rank: '1st degree black belt', zenithYear: 2026 },
 
   phone: {
     display: '(816) 287-0492',

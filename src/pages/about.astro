@@ -8,6 +8,7 @@ import { coaches, values } from '../data/coaches';
 import { site } from '../data/site';
 import teamGi from '../assets/photos/gallery-2.jpg';
 import lineagePhoto from '../assets/photos/gallery-24.jpeg';
+import promotionPhoto from '../assets/rob-josh-collage-2.jpeg';
 import g4 from '../assets/photos/gallery-4.jpg';
 import g13 from '../assets/photos/gallery-13.jpg';
 import g14 from '../assets/photos/gallery-14.jpg';
@@ -48,7 +49,7 @@ const personSchema = coaches.map((c) => ({
 <BaseLayout
   breadcrumb="About"
   title="About Us — Coaches & Story"
-  description="Square One Jiu Jitsu Academy was founded in 2023 by Josh Smith (black belt from Renato Tavares) and Heidi Smith in downtown Lee's Summit, MO. A Zenith BJJ affiliate under Robert Drysdale since 2026."
+  description="Square One Jiu Jitsu Academy was founded in 2023 by Josh Smith (1st degree black belt under Robert Drysdale) and Heidi Smith in downtown Lee's Summit, MO. A Zenith BJJ affiliate since 2026."
   schema={personSchema}
 >
   <PageHero
@@ -97,15 +98,21 @@ const personSchema = coaches.map((c) => ({
           connects our Lee's Summit academy to one of jiu-jitsu's respected international teams.
         </p>
         <p>
-          Head coach Josh Smith received his black belt from <strong class="text-foreground">Renato Tavares</strong> in 2023
-          and joined <strong class="text-foreground">Robert Drysdale</strong> and Zenith BJJ in 2026.
+          Head coach Josh Smith is a <strong class="text-foreground">1st degree black belt</strong> under
+          <strong class="text-foreground">Robert Drysdale</strong> and has been part of the Zenith BJJ team since 2026.
         </p>
       </div>
     </div>
-    <figure class="mx-auto w-full max-w-sm">
-      <Image src={lineagePhoto} alt="Professor Josh Smith (right) with Robert Drysdale (left), both wearing black belts" widths={[400, 768]} sizes="(min-width: 1024px) 384px, 100vw" class="w-full rounded-(--radius) object-cover" />
-      <figcaption class="mt-2 text-center text-sm text-muted-foreground">Robert Drysdale and Professor Josh Smith</figcaption>
-    </figure>
+    <div class="grid items-start gap-6 sm:grid-cols-5">
+      <figure class="sm:col-span-3">
+        <Image src={promotionPhoto} alt="Robert Drysdale tying a stripe onto Professor Josh Smith's black belt, then embracing him, at Josh's promotion to 1st degree black belt" widths={[400, 768, 1136]} sizes="(min-width: 1024px) 330px, (min-width: 640px) 60vw, 100vw" class="w-full rounded-(--radius) object-cover" />
+        <figcaption class="mt-2 text-center text-sm text-muted-foreground">Josh's promotion to 1st degree black belt under Robert Drysdale, 2026</figcaption>
+      </figure>
+      <figure class="mx-auto w-full max-w-xs sm:col-span-2 sm:max-w-none">
+        <Image src={lineagePhoto} alt="Professor Josh Smith (right) with Robert Drysdale (left), both wearing black belts" widths={[400, 768]} sizes="(min-width: 1024px) 220px, (min-width: 640px) 40vw, 100vw" class="w-full rounded-(--radius) object-cover" />
+        <figcaption class="mt-2 text-center text-sm text-muted-foreground">Robert Drysdale and Professor Josh Smith</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section class="container-page mt-24">
